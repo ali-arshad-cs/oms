@@ -9,6 +9,8 @@ media
 # Backup files #
 *.bak
 oms/__pycache__/
+**/__pycache__/
+__pycache__/
 # If you are using PyCharm #
 # User-specific stuff
 .idea/**/workspace.xml
