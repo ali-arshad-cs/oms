@@ -15,7 +15,7 @@ from .tokens import generate_token
 
 # Create your views here.
 def home(request):
-    return render(request, "index.html")
+    return render(request, "authentication/signin.html")
 
 
 def signup(request):
@@ -27,26 +27,26 @@ def signup(request):
         pass1 = request.POST['pass1']
         pass2 = request.POST['pass2']
 
-        # validations
-        if User.objects.filter(username=username):
-            messages.error(request, "Username already exist! Please try some other username.")
-            return redirect('home')
-
-        if User.objects.filter(email=email).exists():
-            messages.error(request, "Email Already Registered!!")
-            return redirect('home')
-
-        if len(username) > 20:
-            messages.error(request, "Username must be under 20 charcters!!")
-            return redirect('home')
-
-        if pass1 != pass2:
-            messages.error(request, "Passwords didn't matched!!")
-            return redirect('home')
-
-        if not username.isalnum():
-            messages.error(request, "Username must be Alpha-Numeric!!")
-            return redirect('home')
+        # # validations
+        # if User.objects.filter(username=username):
+        #     messages.error(request, "Username already exist! Please try some other username.")
+        #     return redirect('home')
+        #
+        # if User.objects.filter(email=email).exists():
+        #     messages.error(request, "Email Already Registered!!")
+        #     return redirect('home')
+        #
+        # if len(username) > 20:
+        #     messages.error(request, "Username must be under 20 charcters!!")
+        #     return redirect('home')
+        #
+        # if pass1 != pass2:
+        #     messages.error(request, "Passwords didn't matched!!")
+        #     return redirect('signup')
+        #
+        # if not username.isalnum():
+        #     messages.error(request, "Username must be Alpha-Numeric!!")
+        #     return redirect('signup')
 
         myuser = User.objects.create_user(username, email, pass1)
         myuser.first_name = fname
@@ -96,10 +96,10 @@ def signin(request):
         if user is not None:
             login(request, user)
             fname = User.first_name
-            return render(request, "authentication/index.html", {'fname': fname})
+            return render(request, "index.html", {'fname': fname})
         else:
             messages.error(request, "Username and Password wrong")
-            return redirect('home')
+            return redirect('signin')
     return render(request, "authentication/signin.html")
 
 
@@ -111,7 +111,7 @@ def signout(request):
 
 def activate(request, uidb64, token):
     try:
-        uid = force_text(urlsafe_base64_decode(uidb64))
+        uid = force_str(urlsafe_base64_decode(uidb64))
         myuser = User.objects.get(pk=uid)
     except (TypeError, ValueError, OverflowError, User.DoesNotExist):
         myuser = None
