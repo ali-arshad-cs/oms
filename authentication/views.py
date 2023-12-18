@@ -12,9 +12,10 @@ from django.contrib.auth import authenticate, login, logout
 from .tokens import generate_token
 
 
+
 # Create your views here.
 def home(request):
-    return render(request, "authentication/index.html")
+    return render(request, "index.html")
 
 
 def signup(request):
