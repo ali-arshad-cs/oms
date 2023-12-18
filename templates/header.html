@@ -1,14 +1,24 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Dashboard - SB Admin</title>
-        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
-        <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
-        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-    </head>
+   <head>
+      <meta charset="utf-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+      <meta name="description" content="" />
+      <meta name="author" content="" />
+      <title>Dashboard | Al-Saira</title>
+      <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+            <link rel="icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}" />
+      <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+      <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+      <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+      <script>
+         // Add this script to close the alert message after 3 seconds
+         $(document).ready(function () {
+             setTimeout(function () {
+                 $("#alertMessage").alert('close');
+             }, 3000);
+         });
+      </script>
+   </head>

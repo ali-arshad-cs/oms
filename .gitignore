@@ -37,6 +37,7 @@ __pycache__/
 # Created by https://www.gitignore.io
 ### OSX ###
 .DS_Store
+static/.DS_Store
 .AppleDouble
 .LSOverride
 # Icon must end with two \r
