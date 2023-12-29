@@ -38,3 +38,6 @@ class CustomUser(AbstractUser):
 
     def is_manager(self):
         return self.user_type == 'manager'
+
+    def get_user_type_display(self):
+        return dict(self.USER_TYPES)[self.user_type]

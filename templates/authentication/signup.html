@@ -21,46 +21,64 @@
                         </div>
                         {% endfor %}
                         <!--ERROR MESSAGES DISPLAY END-->
+                        {% block content %}
                         <div class="card-body">
-                           <form action="/signup" method="post">
+                           <form method="post" enctype="multipart/form-data">
                               {% csrf_token %}
-                              <div class="form-floating mb-3">
-                                 <div class="form-floating mb-3 mb-md-0">
-                                    <input class="form-control" type="text" id="username" name="username" placeholder="Create a username" pattern="[a-zA-Z0-9]+" title="Username must contain only letters and numbers" required>
-                                    <label for="username">Username</label>
-                                 </div>
-                              </div>
-                              <div class="row mb-3">
+                              <div class="row">
+                                 <!-- Left side -->
                                  <div class="col-md-6">
-                                    <div class="form-floating">
-                                       <input class="form-control" type="text" id="fname" name="fname" placeholder="Enter Your First Name" pattern="[A-Za-z]+" title="Only letters are allowed" required>
-                                       <label for="fname">First Name</label>
+                                    <div class="form-floating mb-3">
+                                       <input class="form-control" type="text" id="{{ form.first_name.id_for_label }}" name="{{ form.first_name.name }}" required>
+                                       <label for="{{ form.first_name.id_for_label }}">{{ form.first_name.label }}</label>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                       <input class="form-control" type="text" id="{{ form.username.id_for_label }}" name="{{ form.username.name }}" required>
+                                       <label for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                       <input class="form-control" type="text" id="{{ form.phone_number.id_for_label }}" name="{{ form.phone_number.name }}">
+                                       <label for="{{ form.phone_number.id_for_label }}">{{ form.phone_number.label }}</label>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                       <textarea class="form-control" id="{{ form.bio.id_for_label }}" name="{{ form.bio.name }}" ></textarea>
+                                       <label for="{{ form.bio.id_for_label }}">{{ form.bio.label }}</label>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                       <input class="form-control" type="password" id="{{ form.password1.id_for_label }}" name="{{ form.password1.name }}" required>
+                                       <label for="{{ form.password1.id_for_label }}">{{ form.password1.label }}</label>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                       <input class="form-control" type="file" id="{{ form.profile_picture.id_for_label }}" name="{{ form.profile_picture.name }}" accept="image/*">
+                                       <label for="{{ form.profile_picture.id_for_label }}">{{ form.profile_picture.label }}</label>
                                     </div>
                                  </div>
+                                 <!-- Right side -->
                                  <div class="col-md-6">
-                                    <div class="form-floating">
-                                       <input class="form-control" type="text" id="lname" name="lname" placeholder="Enter Your Last Name" pattern="[A-Za-z]+" title="Only letters are allowed" required>
-                                       <label for="lname">Last Name</label>
+                                    <div class="form-floating mb-3">
+                                       <input class="form-control" type="text" id="{{ form.last_name.id_for_label }}" name="{{ form.last_name.name }}" required>
+                                       <label for="{{ form.last_name.id_for_label }}">{{ form.last_name.label }}</label>
                                     </div>
-                                 </div>
-                              </div>
-                              <div class="form-floating mb-3">
-                                 <div class="form-floating mb-3 mb-md-0">
-                                    <input class="form-control" type="email" id="email" name="email" placeholder="Enter Your Email" required>
-                                    <label for="email">Email</label>
-                                 </div>
-                              </div>
-                              <div class="row mb-3">
-                                 <div class="col-md-6">
-                                    <div class="form-floating mb-3 mb-md-0">
-                                       <input class="form-control" type="text" id="pass1" name="pass1" placeholder="Enter Your Password" required>
-                                       <label for="">Password</label>
+                                    <div class="form-floating mb-3">
+                                       <input class="form-control" type="email" id="{{ form.email.id_for_label }}" name="{{ form.email.name }}"  required>
+                                       <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
                                     </div>
-                                 </div>
-                                 <div class="col-md-6">
-                                    <div class="form-floating mb-3 mb-md-0">
-                                       <input class="form-control" type="text" id="pass2" name="pass2" placeholder="Enter Confirm Password" required>
-                                       <label for="">Confirm Password</label>
+                                    <div class="form-floating mb-3">
+                                       <input class="form-control" type="date" id="{{ form.date_of_birth.id_for_label }}" name="{{ form.date_of_birth.name }}">
+                                       <label for="{{ form.date_of_birth.id_for_label }}">{{ form.date_of_birth.label }}</label>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                       <input class="form-control" type="text" id="{{ form.address.id_for_label }}" name="{{ form.address.name }}">
+                                       <label for="{{ form.address.id_for_label }}">{{ form.address.label }}</label>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                       <input class="form-control" type="password" id="{{ form.password2.id_for_label }}" name="{{ form.password2.name }}" required>
+                                       <label for="{{ form.password2.id_for_label }}">{{ form.password2.label }}</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                       <div class="form-floating">
+                                          {{ form.user_type }}
+                                       </div>
                                     </div>
                                  </div>
                               </div>
@@ -70,6 +88,7 @@
                                  </div>
                               </div>
                            </form>
+                           {% endblock %}
                         </div>
                         <div class="card-footer text-center py-3">
                            <div class="small"><a href="signin">Have an account? Go to login</a></div>
