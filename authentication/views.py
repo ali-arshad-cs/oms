@@ -10,14 +10,25 @@ from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.utils.encoding import force_bytes, force_str
 from django.contrib.auth import authenticate, login, logout
 from .tokens import generate_token
+from django.shortcuts import render
+from django.conf import settings
+from django.http import HttpResponseNotFound
+from .utils import title_mapping
+
+# Create your view
+# s here.
 
 
-# Create your views here.
 def home(request):
-    return render(request, "index.html")
+    page_title = title_mapping().get('home', 'Default Title')
+    return render(request, "index.html", {'page_title': page_title})
 
 
 def signup(request):
+    page_title = title_mapping().get('signup', 'Al Saira')
+    if request.user.is_authenticated:
+        return redirect('home')
+
     if request.method == "POST":
         username = request.POST["username"]
         fname = request.POST["fname"]
@@ -92,10 +103,15 @@ def signup(request):
 
         return redirect("signin")
 
-    return render(request, "authentication/signup.html")
+    return render(request, "authentication/signup.html", {'page_title': page_title})
 
 
 def signin(request):
+    page_title = title_mapping().get('signin', 'Al Saira')
+    if request.user.is_authenticated:
+        # Redirect to another page, e.g., the home page
+        return redirect('home')
+
     if request.method == "POST":
         username = request.POST["username"]
         pass1 = request.POST["pass1"]
@@ -103,12 +119,11 @@ def signin(request):
         user = authenticate(username=username, password=pass1)
         if user is not None:
             login(request, user)
-            fname = user.first_name
-            return render(request, "index.html", {"fname": fname})
+            return redirect("home")
         else:
             messages.error(request, "Username and Password wrong")
             return redirect("signin")
-    return render(request, "authentication/signin.html")
+    return render(request, "authentication/signin.html", {'page_title': page_title})
 
 
 def signout(request):
@@ -133,3 +148,10 @@ def activate(request, uidb64, token):
         return redirect("signin")
     else:
         return render(request, "activation_failed.html")
+
+
+def custom_404(request, exception=None):
+    if request.path.startswith(settings.STATIC_URL):
+        return HttpResponseNotFound()
+
+    return render(request, '404.html', status=404)
