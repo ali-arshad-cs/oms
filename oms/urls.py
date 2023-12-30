@@ -24,6 +24,7 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('authentication.urls')),
+    path('orphans/', include('orphans.urls')),
 ]
 handler404 = 'authentication.views.custom_404'
 if settings.DEBUG:

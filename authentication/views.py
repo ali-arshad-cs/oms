@@ -9,7 +9,6 @@ from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.utils.encoding import force_bytes, force_str
 from django.contrib.auth import authenticate, login, logout
-
 from .forms import CustomUserCreationForm
 from .tokens import generate_token
 from django.shortcuts import render
@@ -38,7 +37,7 @@ def signup(request):
         else:
             error_message = ''
             for field, errors in form.errors.items():
-                error_message += f'{"<br> ".join(errors)}. '
+                error_message += f'{"</br> ".join(errors)}. '
             messages.error(request, error_message)
     else:
         form = CustomUserCreationForm()
