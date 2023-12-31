@@ -1,0 +1,123 @@
+{% if user.is_authenticated %}
+{% include "header.html" %}
+{% include "sidenav.html" %}
+
+   <div id="layoutSidenav_content">
+   <main>
+      <div class="container-fluid px-4">
+          {% for message in messages %}
+            <div class="alert alert-dismissible fade show {% if message.tags == 'success' %}alert-success{% elif message.tags == 'error' %}alert-danger{% endif %}" role="alert" id="alertMessage">
+               <strong>Alert:</strong> {{ message }}
+               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+               </button>
+            </div>
+            {% endfor %}
+         <h1 class="mt-4">Orphans List</h1>
+
+         <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active">OMS Dashboard</li>
+         </ol>
+         <div class="row">
+            <div class="col-xl-3 col-md-6">
+               <div class="card bg-primary text-white mb-4">
+                  <div class="card-body">Primary Card</div>
+                  <div class="card-footer d-flex align-items-center justify-content-between">
+                     <a class="small text-white stretched-link" href="#">View Details</a>
+                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                  </div>
+               </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+               <div class="card bg-warning text-white mb-4">
+                  <div class="card-body">Warning Card</div>
+                  <div class="card-footer d-flex align-items-center justify-content-between">
+                     <a class="small text-white stretched-link" href="#">View Details</a>
+                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                  </div>
+               </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+               <div class="card bg-success text-white mb-4">
+                  <div class="card-body">Success Card</div>
+                  <div class="card-footer d-flex align-items-center justify-content-between">
+                     <a class="small text-white stretched-link" href="#">View Details</a>
+                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                  </div>
+               </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+               <div class="card bg-danger text-white mb-4">
+                  <div class="card-body">Danger Card</div>
+                  <div class="card-footer d-flex align-items-center justify-content-between">
+                     <a class="small text-white stretched-link" href="#">View Details</a>
+                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                  </div>
+               </div>
+            </div>
+         </div>
+
+       <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-table me-1"></i>
+                    Orphan DataTable
+                </div>
+                <div class="card-body">
+                    <table id="datatablesSimple" class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Age</th>
+                                <th>Gender</th>
+                                <th>Family Status</th>
+                                <th>Date of Birth</th>
+                                <th>Guardian</th>
+                                <th>Siblings</th>
+                                <th>Leaves</th>
+                                <th>Guardian Number</th>
+                                <th>Admission Date</th>
+
+                                <!-- Add other columns as needed -->
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>Name</th>
+                                <th>Age</th>
+                                <th>Gender</th>
+                                <th>Family Status</th>
+                                <th>Date of Birth</th>
+                                 <th>Guardian</th>
+                                <th>Siblings</th>
+                                <th>Leaves</th>
+                                <th>Guardian Number</th>
+                                <th>Admission Date</th>
+                                <!-- Add other columns as needed -->
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            {% for orphan in orphans %}
+                                <tr>
+                                                <td><a href="{% url 'orphans:orphan_detail' pk=orphan.pk %}">{{ orphan.first_name }} {{ orphan.last_name }}</a></td>
+
+                                    <td>5</td>
+                                    <td>{{ orphan.gender }}</td>
+
+                                    <td>{{ orphan.family_status }}</td>
+                                    <td>{{ orphan.date_of_birth }}</td>
+                                    <td>Sakina Bibi</td>
+                                    <td>.</td>
+                                    <td>2</td>
+                                    <td>{{ orphan.contact_number }}</td>
+                                    <td>{{ orphan.admission_date }}</td>
+                                    <!-- Add other columns as needed -->
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+       </div>
+      </div>
+   </main>
+   {% include "footer.html" %}
+   {% endif %}

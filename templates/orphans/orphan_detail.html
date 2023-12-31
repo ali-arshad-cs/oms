@@ -1,18 +1,54 @@
 {% if user.is_authenticated %}
 {% include "header.html" %}
 {% include "sidenav.html" %}
-<div id="layoutSidenav_content">
-<main>
-   <div class="container-fluid px-4">
-      {% for message in messages %}
-      <div class="alert alert-dismissible fade show {% if message.tags == 'success' %}alert-success{% elif message.tags == 'error' %}alert-danger{% endif %}" role="alert" id="alertMessage">
-         <strong>Alert:</strong> {{ message }}
-         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-         <span aria-hidden="true">&times;</span>
-         </button>
-      </div>
-      {% endfor %}
-      <h1 class="mt-4">Orphan Detail</h1>
+
+   <div id="layoutSidenav_content">
+   <main>
+      <div class="container-fluid px-4">
+          {% for message in messages %}
+            <div class="alert alert-dismissible fade show {% if message.tags == 'success' %}alert-success{% elif message.tags == 'error' %}alert-danger{% endif %}" role="alert" id="alertMessage">
+               <strong>Alert:</strong> {{ message }}
+               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+               </button>
+            </div>
+            {% endfor %}
+         <h2 class="mt-4">{{ orphan.first_name }} {{ orphan.last_name }}  Details</h2>
+
+         <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active">OMS Dashboard</li>
+         </ol>
+         <div class="row">
+            <div class="col-xl-3 col-md-6">
+               <div class="card bg-primary text-white mb-4">
+                  <div class="card-body">Education</div>
+                  <div class="card-footer d-flex align-items-center justify-content-between">
+                     <a class="small text-white stretched-link" href="#">View Details</a>
+                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                  </div>
+               </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+               <div class="card bg-warning text-white mb-4">
+                  <div class="card-body">Health</div>
+                  <div class="card-footer d-flex align-items-center justify-content-between">
+                     <a class="small text-white stretched-link" href="#">View Details</a>
+                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                  </div>
+               </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+               <div class="card bg-success text-white mb-4">
+                  <div class="card-body">Leaves</div>
+                  <div class="card-footer d-flex align-items-center justify-content-between">
+                     <a class="small text-white stretched-link" href="#">View Details</a>
+                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                  </div>
+               </div>
+            </div>
+
+         </div>
+
       <div class="card mb-4">
          <div class="card-header">
             <i class="fas fa-table me-1"></i>
@@ -24,6 +60,9 @@
     <dl class="row">
         <dt class="col-sm-3">Name:</dt>
         <dd class="col-sm-9">{{ orphan.first_name }} {{ orphan.last_name }}</dd>
+
+           <dt class="col-sm-3">Age:</dt>
+        <dd class="col-sm-9">{{ orphan.date_of_birth }}</dd>
 
         <dt class="col-sm-3">Date of Birth:</dt>
         <dd class="col-sm-9">{{ orphan.date_of_birth }}</dd>
@@ -67,6 +106,17 @@
         <dt class="col-sm-3">Family Status:</dt>
         <dd class="col-sm-9">{{ orphan.family_status }}</dd>
 
+
+
+        <dt class="col-sm-3">BForm</dt>
+        <dd class="col-sm-9">Downloadable File</dd>
+
+        <dt class="col-sm-3">Admission Form Picture</dt>
+        <dd class="col-sm-9">Downloadable File</dd>
+
+        <dt class="col-sm-3">Picture at time of admission with guardian</dt>
+        <dd class="col-sm-9">Downloadable File</dd>
+
         <!-- Add other fields as needed -->
     </dl>
 
@@ -74,6 +124,11 @@
 
 {% endblock %}
          </div>
+             <div class="card-footer">
+                  <a href="{% url 'orphans:orphan_update' pk=orphan.pk %}" class="btn btn-primary">Edit</a>
+                  <a href="{% url 'orphans:orphan_delete' pk=orphan.pk %}" class="btn btn-danger">Delete</a>
+                  <a href="{% url 'orphans:orphan_list' %}" class="btn btn-secondary">Go Back</a>
+               </div>
 
       </div>
    </div>

@@ -21,7 +21,7 @@ def orphan_create(request):
         if form.is_valid():
             orphan = form.save()
             messages.success(request, 'Orphan created successfully!')
-            return redirect('orphan_detail', pk=orphan.pk)
+            return redirect('orphans:orphan_detail', pk=orphan.pk)
         else:
             for field, errors in form.errors.items():
                 for error in errors:
