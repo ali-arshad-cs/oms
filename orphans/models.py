@@ -31,7 +31,7 @@ class Orphan(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     date_of_birth = models.DateField()
-    gender = models.CharField(max_length=10, choices=GENDER_CHOICES)
+    gender = models.CharField(max_length=10, choices=GENDER_CHOICES, blank=True)
     address = models.TextField()
     notes = models.TextField()
     family_status = models.CharField(max_length=25, choices=FAMILY_STATUS_CHOICES, null=True, blank=True)

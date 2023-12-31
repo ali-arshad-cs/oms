@@ -1,0 +1,82 @@
+{% if user.is_authenticated %}
+{% include "header.html" %}
+{% include "sidenav.html" %}
+<div id="layoutSidenav_content">
+<main>
+   <div class="container-fluid px-4">
+      {% for message in messages %}
+      <div class="alert alert-dismissible fade show {% if message.tags == 'success' %}alert-success{% elif message.tags == 'error' %}alert-danger{% endif %}" role="alert" id="alertMessage">
+         <strong>Alert:</strong> {{ message }}
+         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+         <span aria-hidden="true">&times;</span>
+         </button>
+      </div>
+      {% endfor %}
+      <h1 class="mt-4">Orphan Detail</h1>
+      <div class="card mb-4">
+         <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+            Details
+         </div>
+
+         <div class="card-body">
+         {% block content %}
+    <dl class="row">
+        <dt class="col-sm-3">Name:</dt>
+        <dd class="col-sm-9">{{ orphan.first_name }} {{ orphan.last_name }}</dd>
+
+        <dt class="col-sm-3">Date of Birth:</dt>
+        <dd class="col-sm-9">{{ orphan.date_of_birth }}</dd>
+
+        <dt class="col-sm-3">Gender:</dt>
+        <dd class="col-sm-9">{{ orphan.gender }}</dd>
+
+        <dt class="col-sm-3">Guardian:</dt>
+        <dd class="col-sm-9">{{ orphan.guardian }}</dd>
+
+        <dt class="col-sm-3">Address:</dt>
+        <dd class="col-sm-9">{{ orphan.address }}</dd>
+
+        <dt class="col-sm-3">Contact Number:</dt>
+        <dd class="col-sm-9">{{ orphan.contact_number }}</dd>
+
+        <dt class="col-sm-3">Ethnicity:</dt>
+        <dd class="col-sm-9">{{ orphan.ethnicity }}</dd>
+
+        <dt class="col-sm-3">Nationality:</dt>
+        <dd class="col-sm-9">{{ orphan.nationality }}</dd>
+
+        <dt class="col-sm-3">Religion:</dt>
+        <dd class="col-sm-9">{{ orphan.religion }}</dd>
+
+        <dt class="col-sm-3">Language:</dt>
+        <dd class="col-sm-9">{{ orphan.language }}</dd>
+
+        <dt class="col-sm-3">Admission Date:</dt>
+        <dd class="col-sm-9">{{ orphan.admission_date }}</dd>
+
+        <dt class="col-sm-3">Discharge Date:</dt>
+        <dd class="col-sm-9">{{ orphan.discharge_date }}</dd>
+
+        <dt class="col-sm-3">Hobbies:</dt>
+        <dd class="col-sm-9">{{ orphan.hobbies }}</dd>
+
+        <dt class="col-sm-3">Special Needs:</dt>
+        <dd class="col-sm-9">{{ orphan.special_needs }}</dd>
+
+        <dt class="col-sm-3">Family Status:</dt>
+        <dd class="col-sm-9">{{ orphan.family_status }}</dd>
+
+        <!-- Add other fields as needed -->
+    </dl>
+
+    <!-- Example: Link to edit orphan -->
+
+{% endblock %}
+         </div>
+
+      </div>
+   </div>
+</main>
+{% include "footer.html" %}
+{% endif %}
