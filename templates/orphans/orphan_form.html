@@ -34,23 +34,32 @@
                         <label for="{{ form.last_name.id_for_label }}">{{ form.last_name.label }}</label>
                      </div>
                      <div class="form-floating mb-3">
-                        <input class="form-control" type="date" id="{{ form.date_of_birth.id_for_label }}" name="{{ form.date_of_birth.name }}">
+                        <input class="form-control" type="date" id="{{ form.date_of_birth.id_for_label }}" name="{{ form.date_of_birth.name }}" required>
                         <label for="{{ form.date_of_birth.id_for_label }}">{{ form.date_of_birth.label }}</label>
                      </div>
                      <div class="form-floating mb-3">
-                        <input class="form-control" type="text" id="{{ form.address.id_for_label }}" name="{{ form.address.name }}">
+                        <input class="form-control" type="text" id="{{ form.address.id_for_label }}" name="{{ form.address.name }}" required>
                         <label for="{{ form.address.id_for_label }}">{{ form.address.label }}</label>
                      </div>
                      <div class="form-floating mb-3">
-                        <input class="form-control" type="text" id="{{ form.contact_number.id_for_label }}" name="{{ form.contact_number.name }}">
+                        <input class="form-control" type="text" id="{{ form.contact_number.id_for_label }}" name="{{ form.contact_number.name }}" required>
                         <label for="{{ form.contact_number.id_for_label }}">{{ form.contact_number.label }}</label>
+                     </div>
+                     <div class="form-floating mb-3">
+                        <select class="form-select" id="{{ form.status.id_for_label }}" name="{{ form.status.name }}" required>
+                           <option value="" disabled selected>Select Status</option>
+                           {% for value, label in form.status.field.choices %}
+                           <option value="{{ value }}">{{ label }}</option>
+                           {% endfor %}
+                        </select>
+                        <label for="{{ form.status.id_for_label }}">{{ form.status.label }}</label>
                      </div>
                   </div>
                   <!-- Right side -->
                   <!-- Right side -->
                   <div class="col-md-3">
                      <div class="form-floating mb-3">
-                        <select class="form-select" id="{{ form.family_status.id_for_label }}" name="{{ form.family_status.name }}">
+                        <select class="form-select" id="{{ form.family_status.id_for_label }}" name="{{ form.family_status.name }}" required>
                            <option value="" disabled selected>Select family status</option>
                            {% for value, label in form.family_status.field.choices %}
                            <option value="{{ value }}">{{ label }}</option>
@@ -59,41 +68,41 @@
                         <label for="{{ form.family_status.id_for_label }}">{{ form.family_status.label }}</label>
                      </div>
                      <div class="form-floating mb-3">
-                        <input class="form-control" type="text" id="{{ form.ethnicity.id_for_label }}" name="{{ form.ethnicity.name }}">
+                        <input class="form-control" type="text" id="{{ form.ethnicity.id_for_label }}" name="{{ form.ethnicity.name }}" required>
                         <label for="{{ form.ethnicity.id_for_label }}">{{ form.ethnicity.label }}</label>
                      </div>
                      <div class="form-floating mb-3">
-                        <input class="form-control" type="text" id="{{ form.nationality.id_for_label }}" name="{{ form.nationality.name }}">
+                        <input class="form-control" type="text" id="{{ form.nationality.id_for_label }}" name="{{ form.nationality.name }}" required>
                         <label for="{{ form.nationality.id_for_label }}">{{ form.nationality.label }}</label>
                      </div>
                      <div class="form-floating mb-3">
-                        <input class="form-control" type="text" id="{{ form.religion.id_for_label }}" name="{{ form.religion.name }}">
+                        <input class="form-control" type="text" id="{{ form.religion.id_for_label }}" name="{{ form.religion.name }}" required>
                         <label for="{{ form.religion.id_for_label }}">{{ form.religion.label }}</label>
                      </div>
                      <div class="form-floating mb-3">
-                        <input class="form-control" type="text" id="{{ form.language.id_for_label }}" name="{{ form.language.name }}">
+                        <input class="form-control" type="text" id="{{ form.language.id_for_label }}" name="{{ form.language.name }}" required>
                         <label for="{{ form.language.id_for_label }}">{{ form.language.label }}</label>
                      </div>
                   </div>
                   <div class="col-md-3">
                      <div class="form-floating mb-3">
-                        <input class="form-control" type="date" id="{{ form.admission_date.id_for_label }}" name="{{ form.admission_date.name }}">
+                        <input class="form-control" type="date" id="{{ form.admission_date.id_for_label }}" name="{{ form.admission_date.name }}" required>
                         <label for="{{ form.admission_date.id_for_label }}">{{ form.admission_date.label }}</label>
                      </div>
                      <div class="form-floating mb-3">
-                        <input class="form-control" type="date" id="{{ form.discharge_date.id_for_label }}" name="{{ form.discharge_date.name }}">
+                        <input class="form-control" type="date" id="{{ form.discharge_date.id_for_label }}" name="{{ form.discharge_date.name }}" >
                         <label for="{{ form.discharge_date.id_for_label }}">{{ form.discharge_date.label }}</label>
                      </div>
                      <div class="form-floating mb-3">
-                        <textarea class="form-control" id="{{ form.hobbies.id_for_label }}" name="{{ form.hobbies.name }}"></textarea>
+                        <textarea class="form-control" id="{{ form.hobbies.id_for_label }}" name="{{ form.hobbies.name }}" required></textarea>
                         <label for="{{ form.hobbies.id_for_label }}">{{ form.hobbies.label }}</label>
                      </div>
                      <div class="form-floating mb-3">
-                        <textarea class="form-control" id="{{ form.special_needs.id_for_label }}" name="{{ form.special_needs.name }}"></textarea>
+                        <textarea class="form-control" id="{{ form.special_needs.id_for_label }}" name="{{ form.special_needs.name }}" required></textarea>
                         <label for="{{ form.special_needs.id_for_label }}">{{ form.special_needs.label }}</label>
                      </div>
                      <div class="form-floating mb-3">
-                        <textarea class="form-control" id="{{ form.notes.id_for_label }}" name="{{ form.notes.name }}"></textarea>
+                        <textarea class="form-control" id="{{ form.notes.id_for_label }}" name="{{ form.notes.name }}" required></textarea>
                         <label for="{{ form.notes.id_for_label }}">{{ form.notes.label }}</label>
                      </div>
                   </div>
@@ -107,6 +116,26 @@
                         </select>
                         <label for="{{ form.gender.id_for_label }}">{{ form.gender.label }}</label>
                      </div>
+                     <div class="form-floating mb-3">
+        <input class="form-control" type="file" id="{{ form.orphan_picture.id_for_label }}" name="{{ form.orphan_picture.name }}" accept="image/*" required>
+        <label for="{{ form.orphan_picture.id_for_label }}">{{ form.orphan_picture.label }}</label>
+    </div>
+
+    <div class="form-floating mb-3">
+        <input class="form-control" type="file" id="{{ form.admission_form_picture.id_for_label }}" name="{{ form.admission_form_picture.name }}" accept="image/*">
+        <label for="{{ form.admission_form_picture.id_for_label }}">{{ form.admission_form_picture.label }}</label>
+    </div>
+
+    <div class="form-floating mb-3">
+        <input class="form-control" type="file" id="{{ form.bform_picture.id_for_label }}" name="{{ form.bform_picture.name }}" accept="image/*">
+        <label for="{{ form.bform_picture.id_for_label }}">{{ form.bform_picture.label }}</label>
+    </div>
+
+    <div class="form-floating mb-3">
+        <input class="form-control" type="file" id="{{ form.picture_at_time_of_admission.id_for_label }}" name="{{ form.picture_at_time_of_admission.name }}" accept="image/*">
+        <label for="{{ form.picture_at_time_of_admission.id_for_label }}">{{ form.picture_at_time_of_admission.label }}</label>
+    </div>
+
                      <!-- Add other fields here following the example -->
                   </div>
                   <!-- Add other fields here following the example -->

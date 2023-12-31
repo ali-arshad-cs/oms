@@ -11,6 +11,11 @@ class Orphan(models.Model):
         ('female', 'Female'),
     ]
 
+    STATUS_CHOICES = [
+        ('onboard', 'Onboard'),
+        ('discharged', 'Discharged'),
+    ]
+
     FAMILY_STATUS_CHOICES = [
         ('father_died', 'Father Died'),
         ('mother_died', 'Mother Died'),
@@ -44,6 +49,12 @@ class Orphan(models.Model):
     discharge_date = models.DateField(null=True, blank=True)
     hobbies = models.TextField(null=True, blank=True)
     special_needs = models.TextField(null=True, blank=True)
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, blank=True)
+    orphan_picture = models.ImageField(upload_to='shared_images/', null=True, blank=True)
+    admission_form_picture = models.ImageField(upload_to='shared_images/', null=True, blank=True)
+    bform_picture = models.ImageField(upload_to='shared_images/', null=True, blank=True)
+    picture_at_time_of_admission = models.ImageField(upload_to='shared_images/', null=True, blank=True)
+
     #siblings = models.ManyToManyField('self', blank=True, symmetrical=False)
 
     #FOREIGN KEYS FIELDS

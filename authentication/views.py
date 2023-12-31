@@ -52,7 +52,7 @@ def signin(request):
         user = authenticate(username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect("home")  # Redirect to the home page or any desired page after successful login
+            return redirect("authentication:home")  # Redirect to the home page or any desired page after successful login
         else:
             messages.error(request, "Invalid username or password. Please try again.")
     return render(request, "authentication/signin.html", {'page_title': page_title})
@@ -61,7 +61,7 @@ def signin(request):
 def signout(request):
     logout(request)
     messages.success(request, "Logged Out Successfully")
-    return redirect("signin")
+    return redirect("authentication:signin")
 
 
 def activate(request, uidb64, token):

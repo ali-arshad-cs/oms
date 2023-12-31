@@ -17,7 +17,7 @@ def orphan_detail(request, pk):
 
 def orphan_create(request):
     if request.method == 'POST':
-        form = OrphanForm(request.POST)
+        form = OrphanForm(request.POST, request.FILES)
         if form.is_valid():
             orphan = form.save()
             messages.success(request, 'Orphan created successfully!')
@@ -39,10 +39,10 @@ def orphan_update(request, pk):
         form = OrphanForm(request.POST, instance=orphan)
         if form.is_valid():
             orphan = form.save()
-            return redirect('orphan_detail', pk=orphan.pk)
+            return redirect('orphans:orphan_detail', pk=orphan.pk)
     else:
         form = OrphanForm(instance=orphan)
-    return render(request, 'orphans/orphan_form.html', {'form': form, 'action': 'Update'})
+    return render(request, 'orphans/orphan_update.html', {'form': form, 'action': 'Update'})
 
 
 def orphan_delete(request, pk):

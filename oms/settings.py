@@ -62,7 +62,7 @@ ROOT_URLCONF = 'oms.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ["templates"],
+        'DIRS': ["orphans", "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -131,6 +131,9 @@ STATICFILES_DIRS = [
 ]
 
 STATIC_URL = "static/"
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / "media"  # Use pathlib.Path(BASE_DIR) if BASE_DIR is a string
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

@@ -1,135 +1,142 @@
 {% if user.is_authenticated %}
 {% include "header.html" %}
 {% include "sidenav.html" %}
-
-   <div id="layoutSidenav_content">
-   <main>
-      <div class="container-fluid px-4">
-          {% for message in messages %}
-            <div class="alert alert-dismissible fade show {% if message.tags == 'success' %}alert-success{% elif message.tags == 'error' %}alert-danger{% endif %}" role="alert" id="alertMessage">
-               <strong>Alert:</strong> {{ message }}
-               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-               <span aria-hidden="true">&times;</span>
-               </button>
-            </div>
-            {% endfor %}
-         <h2 class="mt-4">{{ orphan.first_name }} {{ orphan.last_name }}  Details</h2>
-
-         <ol class="breadcrumb mb-4">
-            <li class="breadcrumb-item active">OMS Dashboard</li>
-         </ol>
-         <div class="row">
-            <div class="col-xl-3 col-md-6">
-               <div class="card bg-primary text-white mb-4">
-                  <div class="card-body">Education</div>
-                  <div class="card-footer d-flex align-items-center justify-content-between">
-                     <a class="small text-white stretched-link" href="#">View Details</a>
-                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                  </div>
+<div id="layoutSidenav_content">
+<main>
+   <div class="container-fluid px-4">
+      {% for message in messages %}
+      <div class="alert alert-dismissible fade show {% if message.tags == 'success' %}alert-success{% elif message.tags == 'error' %}alert-danger{% endif %}" role="alert" id="alertMessage">
+         <strong>Alert:</strong> {{ message }}
+         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+         <span aria-hidden="true">&times;</span>
+         </button>
+      </div>
+      {% endfor %}
+      <h2 class="mt-4">{{ orphan.first_name }} {{ orphan.last_name }}  Details</h2>
+      <ol class="breadcrumb mb-4">
+         <li class="breadcrumb-item active">OMS Dashboard</li>
+      </ol>
+      <div class="row">
+         <div class="col-xl-3 col-md-6">
+            <div class="card bg-primary text-white mb-4">
+               <div class="card-body">Education</div>
+               <div class="card-footer d-flex align-items-center justify-content-between">
+                  <a class="small text-white stretched-link" href="#">View Details</a>
+                  <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                </div>
             </div>
-            <div class="col-xl-3 col-md-6">
-               <div class="card bg-warning text-white mb-4">
-                  <div class="card-body">Health</div>
-                  <div class="card-footer d-flex align-items-center justify-content-between">
-                     <a class="small text-white stretched-link" href="#">View Details</a>
-                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                  </div>
-               </div>
-            </div>
-            <div class="col-xl-3 col-md-6">
-               <div class="card bg-success text-white mb-4">
-                  <div class="card-body">Leaves</div>
-                  <div class="card-footer d-flex align-items-center justify-content-between">
-                     <a class="small text-white stretched-link" href="#">View Details</a>
-                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                  </div>
-               </div>
-            </div>
-
          </div>
-
+         <div class="col-xl-3 col-md-6">
+            <div class="card bg-warning text-white mb-4">
+               <div class="card-body">Health</div>
+               <div class="card-footer d-flex align-items-center justify-content-between">
+                  <a class="small text-white stretched-link" href="#">View Details</a>
+                  <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+               </div>
+            </div>
+         </div>
+         <div class="col-xl-3 col-md-6">
+            <div class="card bg-success text-white mb-4">
+               <div class="card-body">Leaves</div>
+               <div class="card-footer d-flex align-items-center justify-content-between">
+                  <a class="small text-white stretched-link" href="#">View Details</a>
+                  <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+               </div>
+            </div>
+         </div>
+      </div>
       <div class="card mb-4">
          <div class="card-header">
             <i class="fas fa-table me-1"></i>
             Details
          </div>
-
          <div class="card-body">
-         {% block content %}
-    <dl class="row">
-        <dt class="col-sm-3">Name:</dt>
-        <dd class="col-sm-9">{{ orphan.first_name }} {{ orphan.last_name }}</dd>
-
-           <dt class="col-sm-3">Age:</dt>
-        <dd class="col-sm-9">{{ orphan.date_of_birth }}</dd>
-
-        <dt class="col-sm-3">Date of Birth:</dt>
-        <dd class="col-sm-9">{{ orphan.date_of_birth }}</dd>
-
-        <dt class="col-sm-3">Gender:</dt>
-        <dd class="col-sm-9">{{ orphan.gender }}</dd>
-
-        <dt class="col-sm-3">Guardian:</dt>
-        <dd class="col-sm-9">{{ orphan.guardian }}</dd>
-
-        <dt class="col-sm-3">Address:</dt>
-        <dd class="col-sm-9">{{ orphan.address }}</dd>
-
-        <dt class="col-sm-3">Contact Number:</dt>
-        <dd class="col-sm-9">{{ orphan.contact_number }}</dd>
-
-        <dt class="col-sm-3">Ethnicity:</dt>
-        <dd class="col-sm-9">{{ orphan.ethnicity }}</dd>
-
-        <dt class="col-sm-3">Nationality:</dt>
-        <dd class="col-sm-9">{{ orphan.nationality }}</dd>
-
-        <dt class="col-sm-3">Religion:</dt>
-        <dd class="col-sm-9">{{ orphan.religion }}</dd>
-
-        <dt class="col-sm-3">Language:</dt>
-        <dd class="col-sm-9">{{ orphan.language }}</dd>
-
-        <dt class="col-sm-3">Admission Date:</dt>
-        <dd class="col-sm-9">{{ orphan.admission_date }}</dd>
-
-        <dt class="col-sm-3">Discharge Date:</dt>
-        <dd class="col-sm-9">{{ orphan.discharge_date }}</dd>
-
-        <dt class="col-sm-3">Hobbies:</dt>
-        <dd class="col-sm-9">{{ orphan.hobbies }}</dd>
-
-        <dt class="col-sm-3">Special Needs:</dt>
-        <dd class="col-sm-9">{{ orphan.special_needs }}</dd>
-
-        <dt class="col-sm-3">Family Status:</dt>
-        <dd class="col-sm-9">{{ orphan.family_status }}</dd>
-
-
-
-        <dt class="col-sm-3">BForm</dt>
-        <dd class="col-sm-9">Downloadable File</dd>
-
-        <dt class="col-sm-3">Admission Form Picture</dt>
-        <dd class="col-sm-9">Downloadable File</dd>
-
-        <dt class="col-sm-3">Picture at time of admission with guardian</dt>
-        <dd class="col-sm-9">Downloadable File</dd>
-
-        <!-- Add other fields as needed -->
-    </dl>
-
-    <!-- Example: Link to edit orphan -->
-
-{% endblock %}
+            {% block content %}
+            <dl class="row">
+               <dt class="col-sm-3">Picture:</dt>
+               <dd class="col-sm-9" style="text-align: center;">
+                  <div style="width: 150px; height: 200px; overflow: hidden; border: 1px solid #ccc; border-radius: 5px;">
+                     <img src="{{ orphan.orphan_picture.url }}" alt="Picture" style="width: 100%; height: 100%; object-fit: cover; border-radius: 5px;">
+                  </div>
+               </dd>
+               <dt class="col-sm-3">Name:</dt>
+               <dd class="col-sm-9">{{ orphan.first_name }} {{ orphan.last_name }}</dd>
+               <dt class="col-sm-3">Age:</dt>
+               <dd class="col-sm-9">{{ orphan.date_of_birth }}</dd>
+               <dt class="col-sm-3">Date of Birth:</dt>
+               <dd class="col-sm-9">{{ orphan.date_of_birth }}</dd>
+               <dt class="col-sm-3">Gender:</dt>
+               <dd class="col-sm-9">{{ orphan.gender }}</dd>
+               <dt class="col-sm-3">Guardian:</dt>
+               <dd class="col-sm-9">{{ orphan.guardian }}</dd>
+               <dt class="col-sm-3">Address:</dt>
+               <dd class="col-sm-9">{{ orphan.address }}</dd>
+               <dt class="col-sm-3">Contact Number:</dt>
+               <dd class="col-sm-9">{{ orphan.contact_number }}</dd>
+               <dt class="col-sm-3">Ethnicity:</dt>
+               <dd class="col-sm-9">{{ orphan.ethnicity }}</dd>
+               <dt class="col-sm-3">Nationality:</dt>
+               <dd class="col-sm-9">{{ orphan.nationality }}</dd>
+               <dt class="col-sm-3">Religion:</dt>
+               <dd class="col-sm-9">{{ orphan.religion }}</dd>
+               <dt class="col-sm-3">Language:</dt>
+               <dd class="col-sm-9">{{ orphan.language }}</dd>
+               <dt class="col-sm-3">Admission Date:</dt>
+               <dd class="col-sm-9">{{ orphan.admission_date }}</dd>
+               <dt class="col-sm-3">Discharge Date:</dt>
+               <dd class="col-sm-9">{{ orphan.discharge_date }}</dd>
+               <dt class="col-sm-3">Hobbies:</dt>
+               <dd class="col-sm-9">{{ orphan.hobbies }}</dd>
+               <dt class="col-sm-3">Special Needs:</dt>
+               <dd class="col-sm-9">{{ orphan.special_needs }}</dd>
+               <dt class="col-sm-3">Family Status:</dt>
+               <dd class="col-sm-9">{{ orphan.family_status }}</dd>
+               <dt class="col-sm-3">BForm</dt>
+               <dd class="col-sm-9">
+                  {% if orphan.bform_picture %}
+                  {% if "image" in orphan.bform_picture.content_type %}
+                  <img src="{{ orphan.bform_picture.url }}" alt="BForm" style="max-width: 100%; max-height: 200px; border-radius: 5px;">
+                  {% else %}
+                  <a href="{{ orphan.bform_picture.url }}" target="_blank">Open File</a>
+                  {% endif %}
+                  {% else %}
+                  No file available
+                  {% endif %}
+               </dd>
+               <dt class="col-sm-3">Admission Form Picture</dt>
+               <dd class="col-sm-9">
+                  {% if orphan.admission_form_picture %}
+                  {% if "image" in orphan.admission_form_picture.content_type %}
+                  <img src="{{ orphan.admission_form_picture.url }}" alt="Admission Form" style="max-width: 100%; max-height: 200px; border-radius: 5px;">
+                  {% else %}
+                  <a href="{{ orphan.admission_form_picture.url }}" target="_blank">Open File</a>
+                  {% endif %}
+                  {% else %}
+                  No file available
+                  {% endif %}
+               </dd>
+               <dt class="col-sm-3">Picture at the time of admission with guardian</dt>
+               <dd class="col-sm-9">
+                  {% if orphan.picture_at_time_of_admission %}
+                  {% if "image" in orphan.picture_at_time_of_admission.content_type %}
+                  <img src="{{ orphan.picture_at_time_of_admission.url }}" alt="Admission with Guardian" style="max-width: 100%; max-height: 200px; border-radius: 5px;">
+                  {% else %}
+                  <a href="{{ orphan.picture_at_time_of_admission.url }}" target="_blank">Open File</a>
+                  {% endif %}
+                  {% else %}
+                  No file available
+                  {% endif %}
+               </dd>
+               <!-- Add other fields as needed -->
+            </dl>
+            <!-- Example: Link to edit orphan -->
+            {% endblock %}
          </div>
-             <div class="card-footer">
-                  <a href="{% url 'orphans:orphan_update' pk=orphan.pk %}" class="btn btn-primary">Edit</a>
-                  <a href="{% url 'orphans:orphan_delete' pk=orphan.pk %}" class="btn btn-danger">Delete</a>
-                  <a href="{% url 'orphans:orphan_list' %}" class="btn btn-secondary">Go Back</a>
-               </div>
-
+         <div class="card-footer">
+            <a href="{% url 'orphans:orphan_update' pk=orphan.pk %}" class="btn btn-primary">Edit</a>
+            <a href="{% url 'orphans:orphan_delete' pk=orphan.pk %}" class="btn btn-danger">Delete</a>
+            <a href="{% url 'orphans:orphan_list' %}" class="btn btn-secondary">Go Back</a>
+         </div>
       </div>
    </div>
 </main>

@@ -66,38 +66,51 @@
                     <table id="datatablesSimple" class="table">
                         <thead>
                             <tr>
+                                <th>Picture</th>
                                 <th>Name</th>
                                 <th>Age</th>
                                 <th>Gender</th>
                                 <th>Family Status</th>
-                                <th>Date of Birth</th>
+                                <th>DOB</th>
                                 <th>Guardian</th>
                                 <th>Siblings</th>
                                 <th>Leaves</th>
                                 <th>Guardian Number</th>
                                 <th>Admission Date</th>
+                                <th>Status</th>
 
                                 <!-- Add other columns as needed -->
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
+                                 <th>Picture</th>
                                 <th>Name</th>
                                 <th>Age</th>
                                 <th>Gender</th>
                                 <th>Family Status</th>
-                                <th>Date of Birth</th>
+                                <th>DOB</th>
                                  <th>Guardian</th>
                                 <th>Siblings</th>
                                 <th>Leaves</th>
                                 <th>Guardian Number</th>
                                 <th>Admission Date</th>
+                                <th>Status</th>
                                 <!-- Add other columns as needed -->
                             </tr>
                         </tfoot>
                         <tbody>
                             {% for orphan in orphans %}
                                 <tr>
+                                <td style="text-align: center;">
+    {% if orphan.orphan_picture %}
+        <div style="width: 45px; height: 45px; overflow: hidden; border-radius: 50%; border: 2px solid #ccc;">
+            <img src="{{ orphan.orphan_picture.url }}" alt="Picture" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+        </div>
+    {% else %}
+        <!-- Display nothing if orphan_picture is not present -->
+    {% endif %}
+</td>
                                                 <td><a href="{% url 'orphans:orphan_detail' pk=orphan.pk %}">{{ orphan.first_name }} {{ orphan.last_name }}</a></td>
 
                                     <td>5</td>
@@ -110,6 +123,7 @@
                                     <td>2</td>
                                     <td>{{ orphan.contact_number }}</td>
                                     <td>{{ orphan.admission_date }}</td>
+                                    <td style="color: green !important;">Onboard</td>
                                     <!-- Add other columns as needed -->
                                 </tr>
                             {% endfor %}
