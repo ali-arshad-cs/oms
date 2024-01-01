@@ -33,7 +33,7 @@ def signup(request):
             user = form.save()
             login(request, user)  # Log in the user after successful signup
             messages.success(request, 'You have successfully signed up!')
-            return redirect('home')  # Redirect to the home page or any other desired page
+            return redirect('authentication:home')  # Redirect to the home page or any other desired page
         else:
             error_message = ''
             for field, errors in form.errors.items():
