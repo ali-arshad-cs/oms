@@ -75,10 +75,14 @@
                                        <input class="form-control" type="password" id="{{ form.password2.id_for_label }}" name="{{ form.password2.name }}" required>
                                        <label for="{{ form.password2.id_for_label }}">{{ form.password2.label }}</label>
                                     </div>
-                                    <div class="col-md-6">
-                                       <div class="form-floating">
-                                          {{ form.user_type }}
-                                       </div>
+                                    <div class="form-floating mb-3">
+                                       <select class="form-select" id="{{ form.user_type.id_for_label }}" name="{{ form.user_type.name }}" required>
+                                          <option value="" disabled selected>Select family status</option>
+                                          {% for value, label in form.user_type.field.choices %}
+                                          <option value="{{ value }}">{{ label }}</option>
+                                          {% endfor %}
+                                       </select>
+                                       <label for="{{ form.user_type.id_for_label }}">{{ form.user_type.label }}</label>
                                     </div>
                                  </div>
                               </div>

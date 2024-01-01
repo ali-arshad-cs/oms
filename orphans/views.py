@@ -32,20 +32,30 @@ def orphan_create(request):
     return render(request, 'orphans/orphan_form.html', {'form': form, 'action': 'Create'})
 
 
-
 def orphan_update(request, pk):
     orphan = get_object_or_404(Orphan, pk=pk)
     if request.method == 'POST':
         form = OrphanForm(request.POST, instance=orphan)
         if form.is_valid():
             orphan = form.save()
+            messages.success(request, 'Orphan updated successfully.')
             return redirect('orphans:orphan_detail', pk=orphan.pk)
+        else:
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, f"Error updating orphan: {field.capitalize()} - {error}")
     else:
         form = OrphanForm(instance=orphan)
+
     return render(request, 'orphans/orphan_update.html', {'form': form, 'action': 'Update'})
 
 
 def orphan_delete(request, pk):
-    orphan = get_object_or_404(Orphan, pk=pk)
-    orphan.delete()
-    return redirect('orphan_list')
+    try:
+        orphan = Orphan.objects.get(pk=pk)
+        orphan.delete()
+        messages.success(request, 'Orphan deleted successfully.')
+    except Orphan.DoesNotExist:
+        messages.error(request, 'Orphan not found.')
+
+    return redirect('orphans:orphan_list')

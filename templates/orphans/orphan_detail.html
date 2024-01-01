@@ -4,6 +4,11 @@
 <div id="layoutSidenav_content">
 <main>
    <div class="container-fluid px-4">
+
+      <h2 class="mt-4">{{ orphan.first_name }} {{ orphan.last_name }}  Details</h2>
+      <ol class="breadcrumb mb-4">
+         <li class="breadcrumb-item active">OMS Dashboard</li>
+      </ol>
       {% for message in messages %}
       <div class="alert alert-dismissible fade show {% if message.tags == 'success' %}alert-success{% elif message.tags == 'error' %}alert-danger{% endif %}" role="alert" id="alertMessage">
          <strong>Alert:</strong> {{ message }}
@@ -12,10 +17,6 @@
          </button>
       </div>
       {% endfor %}
-      <h2 class="mt-4">{{ orphan.first_name }} {{ orphan.last_name }}  Details</h2>
-      <ol class="breadcrumb mb-4">
-         <li class="breadcrumb-item active">OMS Dashboard</li>
-      </ol>
       <div class="row">
          <div class="col-xl-3 col-md-6">
             <div class="card bg-primary text-white mb-4">
