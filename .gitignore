@@ -58,6 +58,7 @@ Temporary Items
 *.py[cod]
 # C extensions
 *.so
+media
 # Distribution / packaging
 .Python
 env/
