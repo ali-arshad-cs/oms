@@ -3,7 +3,6 @@ from guardians.models import Guardian  # Import Guardian here
 from datetime import date
 
 
-
 class Orphan(models.Model):
     GENDER_CHOICES = [
         ('male', 'Male'),
@@ -54,6 +53,7 @@ class Orphan(models.Model):
     bform_picture = models.ImageField(upload_to='shared_images/', null=True, blank=True)
     picture_at_time_of_admission = models.ImageField(upload_to='shared_images/', null=True, blank=True)
     siblings = models.ManyToManyField('self', blank=True, symmetrical=False)
+
     #FOREIGN KEYS FIELDS
     guardian = models.ForeignKey(Guardian, on_delete=models.CASCADE, related_name='orphans', null=True, blank=True)
     # health_record = models.OneToOneField(HealthRecord, on_delete=models.SET_NULL, null=True, blank=True)
@@ -69,3 +69,33 @@ class Orphan(models.Model):
         today = date.today()
         return today.year - self.date_of_birth.year - (
                     (today.month, today.day) < (self.date_of_birth.month, self.date_of_birth.day))
+
+    def time_spent(self):
+        if self.admission_date is None:
+            return "Invalid admission date"
+
+        if not isinstance(self.admission_date, date):
+            return "Invalid admission date"
+
+        if self.discharge_date is not None:
+            if not isinstance(self.discharge_date, date):
+                return "Invalid discharge date"
+
+            end_date = self.discharge_date
+        else:
+            end_date = date.today()
+
+        years = end_date.year - self.admission_date.year
+        months = end_date.month - self.admission_date.month
+
+        if end_date.day < self.admission_date.day:
+            months -= 1
+
+        if months < 0:
+            years -= 1
+            months += 12
+
+        year_unit = "Year" if years == 1 else "Years"
+        month_unit = "month" if months == 1 else "months"
+
+        return f"{years} {year_unit} and {months} {month_unit}"

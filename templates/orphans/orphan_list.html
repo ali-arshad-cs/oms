@@ -66,12 +66,13 @@
                      <th>Age</th>
                      <th>Gender</th>
                      <th>Family Status</th>
-                     <th>DOB</th>
                      <th>Guardian</th>
                      <th>Siblings</th>
                      <th>Leaves</th>
                      <th>Guardian Number</th>
                      <th>Admission Date</th>
+                     <th>Discharge Date</th>
+                     <th>Time Spent</th>
                      <th>Status</th>
                      <!-- Add other columns as needed -->
                   </tr>
@@ -83,12 +84,13 @@
                      <th>Age</th>
                      <th>Gender</th>
                      <th>Family Status</th>
-                     <th>DOB</th>
                      <th>Guardian</th>
                      <th>Siblings</th>
                      <th>Leaves</th>
                      <th>Guardian Number</th>
                      <th>Admission Date</th>
+                     <th>Discharge Date</th>
+                     <th>Time Spent</th>
                      <th>Status</th>
                      <!-- Add other columns as needed -->
                   </tr>
@@ -109,7 +111,7 @@
                      <td>{{ orphan.age }}</td>
                      <td>{{ orphan.gender }}</td>
                      <td>{{ orphan.family_status }}</td>
-                     <td>{{ orphan.date_of_birth }}</td>
+
                      <td>
                         {% if orphan.guardian %}
                         <a href="{% url 'guardians:guardian_detail' pk=orphan.guardian.id %}">
@@ -129,6 +131,14 @@
                      <td>2</td>
                      <td>{{ orphan.contact_number }}</td>
                      <td>{{ orphan.admission_date }}</td>
+                     <td>{{ orphan.discharge_date }}</td>
+                     <td>
+                     {% if orphan.time_spent %}
+                     {{ orphan.time_spent }}
+                      {% else %}
+
+                        {% endif %}
+                     </td>
                      <td>{{ orphan.status }}</td>
                      <!-- Add other columns as needed -->
                   </tr>
