@@ -1,8 +1,7 @@
 from django.db import models
-# from guardians.models import Guardian
-# from education.models import Education
-# from health.models import HealthRecord
-# from leaves.models import Leave
+from guardians.models import Guardian  # Import Guardian here
+from datetime import date
+
 
 
 class Orphan(models.Model):
@@ -54,15 +53,19 @@ class Orphan(models.Model):
     admission_form_picture = models.ImageField(upload_to='shared_images/', null=True, blank=True)
     bform_picture = models.ImageField(upload_to='shared_images/', null=True, blank=True)
     picture_at_time_of_admission = models.ImageField(upload_to='shared_images/', null=True, blank=True)
-
-    #siblings = models.ManyToManyField('self', blank=True, symmetrical=False)
-
+    siblings = models.ManyToManyField('self', blank=True, symmetrical=False)
     #FOREIGN KEYS FIELDS
+    guardian = models.ForeignKey(Guardian, on_delete=models.CASCADE, related_name='orphans', null=True, blank=True)
     # health_record = models.OneToOneField(HealthRecord, on_delete=models.SET_NULL, null=True, blank=True)
     # education_info = models.ForeignKey(Education, on_delete=models.SET_NULL, null=True, blank=True)
     # guardian = models.ForeignKey(Guardian, on_delete=models.CASCADE)
     # leaves = models.ManyToManyField(Leave, related_name='orphans', blank=True)
 
-
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
+
+    @property
+    def age(self):
+        today = date.today()
+        return today.year - self.date_of_birth.year - (
+                    (today.month, today.day) < (self.date_of_birth.month, self.date_of_birth.day))

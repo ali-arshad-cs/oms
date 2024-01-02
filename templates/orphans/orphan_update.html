@@ -59,6 +59,28 @@
                   <!-- Right side -->
                   <!-- Right side -->
                   <div class="col-md-3">
+                   <div class="form-floating mb-3">
+    <select class="form-select" id="{{ form.guardian.id_for_label }}" name="{{ form.guardian.name }}">
+        <option value="" disabled {% if not form.instance.guardian %}selected{% endif %}>Select guardian</option>
+        {% for value, label in form.guardian.field.choices %}
+            <option value="{{ value }}" {% if form.instance.guardian == value %}selected{% endif %}>{{ label }}</option>
+        {% endfor %}
+    </select>
+    <label for="{{ form.guardian.id_for_label }}">{{ form.guardian.label }}</label>
+</div>
+
+
+
+                      <div class="form-floating mb-3">
+
+                        {{ form.siblings }}
+                     </div>
+
+
+
+
+
+
                      <div class="form-floating mb-3">
                         <select class="form-select" id="{{ form.family_status.id_for_label }}" name="{{ form.family_status.name }}">
                         <option value="" disabled {% if not form.instance.family_status %}selected{% endif %}>Select family status</option>
@@ -68,10 +90,7 @@
                         </select>
                         <label for="{{ form.family_status.id_for_label }}">{{ form.family_status.label }}</label>
                      </div>
-                     <div class="form-floating mb-3">
-                        <input class="form-control" type="text" id="{{ form.ethnicity.id_for_label }}" name="{{ form.ethnicity.name }}" value="{{ form.instance.ethnicity }}">
-                        <label for="{{ form.ethnicity.id_for_label }}">{{ form.ethnicity.label }}</label>
-                     </div>
+
                      <div class="form-floating mb-3">
                         <input class="form-control" type="text" id="{{ form.nationality.id_for_label }}" name="{{ form.nationality.name }}" value="{{ form.instance.nationality }}">
                         <label for="{{ form.nationality.id_for_label }}">{{ form.nationality.label }}</label>
@@ -105,6 +124,10 @@
                      <div class="form-floating mb-3">
                         <textarea class="form-control" id="{{ form.notes.id_for_label }}" name="{{ form.notes.name }}">{{ form.instance.notes }}</textarea>
                         <label for="{{ form.notes.id_for_label }}">{{ form.notes.label }}</label>
+                     </div>
+                       <div class="form-floating mb-3">
+                        <input class="form-control" type="text" id="{{ form.ethnicity.id_for_label }}" name="{{ form.ethnicity.name }}" value="{{ form.instance.ethnicity }}">
+                        <label for="{{ form.ethnicity.id_for_label }}">{{ form.ethnicity.label }}</label>
                      </div>
                   </div>
                   <div class="col-md-3">

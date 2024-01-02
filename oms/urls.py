@@ -7,7 +7,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('authentication.urls')),
     path('orphans/', include('orphans.urls')),
-
+    path('guardians/', include('guardians.urls', namespace='guardians')),
 
 ]
 handler404 = 'authentication.views.custom_404'

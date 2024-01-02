@@ -1,0 +1,95 @@
+{% if user.is_authenticated %}
+{% include "header.html" %}
+{% include "sidenav.html" %}
+<div id="layoutSidenav_content">
+<main>
+   <div class="container-fluid px-4">
+      <h1 class="mt-4">Guardians List</h1>
+      <ol class="breadcrumb mb-4">
+         <li class="breadcrumb-item active">OMS Dashboard</li>
+      </ol>
+      {% for message in messages %}
+      <div class="alert alert-dismissible fade show {% if message.tags == 'success' %}alert-success{% elif message.tags == 'error' %}alert-danger{% endif %}" role="alert" id="alertMessage">
+         <strong>Alert:</strong> {{ message }}
+         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+         <span aria-hidden="true">&times;</span>
+         </button>
+      </div>
+      {% endfor %}
+
+      <div class="card mb-4">
+         <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+            Guardian DataTable
+         </div>
+         <div class="card-body">
+            <table id="datatablesSimple" class="table">
+               <thead>
+                  <tr>
+
+                     <th>Name</th>
+                     <th>CNIC</th>
+                     <th>Phone</th>
+                     <th>Children</th>
+                     <th>Relationship</th>
+                     <th>Occupation</th>
+                     <th>DOB</th>
+                     <th>Gender</th>
+                     <th>Address</th>
+
+                     <!-- Add other columns as needed -->
+                  </tr>
+               </thead>
+               <tfoot>
+                  <tr>
+
+                     <th>Name</th>
+                     <th>CNIC</th>
+                     <th>Phone</th>
+                     <th>Children</th>
+                     <th>Relationship</th>
+                     <th>Occupation</th>
+                     <th>DOB</th>
+                     <th>Gender</th>
+                     <th>Address</th>
+
+
+                     <!-- Add other columns as needed -->
+                  </tr>
+               </tfoot>
+               <tbody>
+                  {% for guardian in guardians %}
+                  <tr>
+
+                     <td><a href="{% url 'guardians:guardian_detail' pk=guardian.pk %}">{{ guardian.first_name }} {{ guardian.last_name }}</a></td>
+                    <td>{{ guardian.cnic }}</td>
+                     <td>{{ guardian.phone_number }}</td>
+                     <td class="col-sm-9" style="text-align: center;">
+    {% if guardian.orphans.all %}
+        <a href="{% url 'orphans:orphan_detail' pk=guardian.orphans.first.pk %}">
+            {{ guardian.orphans.first }}
+        </a>
+    {% else %}
+        None
+    {% endif %}
+</td>
+                     <td>{{ guardian.relationship }}</td>
+                     <td>{{ guardian.occupation }}</td>
+                     <td>{{ guardian.date_of_birth }}</td>
+                     <td>{{ guardian.gender }}</td>
+                     <td>{{ guardian.address }}</td>
+
+
+
+
+                     <!-- Add other columns as needed -->
+                  </tr>
+                  {% endfor %}
+               </tbody>
+            </table>
+         </div>
+      </div>
+   </div>
+</main>
+{% include "footer.html" %}
+{% endif %}

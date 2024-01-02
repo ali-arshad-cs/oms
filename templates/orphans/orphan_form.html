@@ -59,7 +59,22 @@
                   <!-- Right side -->
                   <!-- Right side -->
                   <div class="col-md-3">
-                     <div class="form-floating mb-3">
+                      <div class="form-floating mb-3">
+                        <select class="form-select" id="{{ form.guardian.id_for_label }}" name="{{ form.guardian.name }}" required>
+                           <option value="" disabled selected>Select Guardian</option>
+                           {% for value, label in form.guardian.field.choices %}
+                           <option value="{{ value }}">{{ label }}</option>
+                           {% endfor %}
+                        </select>
+                        <label for="{{ form.guardian.id_for_label }}">{{ form.guardian.label }}</label>
+                     </div>
+
+                      <div class="form-floating mb-3">
+
+                        {{ form.siblings }}
+                     </div>
+
+                      <div class="form-floating mb-3">
                         <select class="form-select" id="{{ form.family_status.id_for_label }}" name="{{ form.family_status.name }}" required>
                            <option value="" disabled selected>Select family status</option>
                            {% for value, label in form.family_status.field.choices %}
@@ -68,10 +83,7 @@
                         </select>
                         <label for="{{ form.family_status.id_for_label }}">{{ form.family_status.label }}</label>
                      </div>
-                     <div class="form-floating mb-3">
-                        <input class="form-control" type="text" id="{{ form.ethnicity.id_for_label }}" name="{{ form.ethnicity.name }}" required>
-                        <label for="{{ form.ethnicity.id_for_label }}">{{ form.ethnicity.label }}</label>
-                     </div>
+
                      <div class="form-floating mb-3">
                         <input class="form-control" type="text" id="{{ form.nationality.id_for_label }}" name="{{ form.nationality.name }}" required>
                         <label for="{{ form.nationality.id_for_label }}">{{ form.nationality.label }}</label>
@@ -84,6 +96,9 @@
                         <input class="form-control" type="text" id="{{ form.language.id_for_label }}" name="{{ form.language.name }}" required>
                         <label for="{{ form.language.id_for_label }}">{{ form.language.label }}</label>
                      </div>
+
+
+
                   </div>
                   <div class="col-md-3">
                      <div class="form-floating mb-3">
@@ -105,6 +120,10 @@
                      <div class="form-floating mb-3">
                         <textarea class="form-control" id="{{ form.notes.id_for_label }}" name="{{ form.notes.name }}" required></textarea>
                         <label for="{{ form.notes.id_for_label }}">{{ form.notes.label }}</label>
+                     </div>
+                       <div class="form-floating mb-3">
+                        <input class="form-control" type="text" id="{{ form.ethnicity.id_for_label }}" name="{{ form.ethnicity.name }}" required>
+                        <label for="{{ form.ethnicity.id_for_label }}">{{ form.ethnicity.label }}</label>
                      </div>
                   </div>
                   <div class="col-md-3">

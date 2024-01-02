@@ -17,35 +17,7 @@
          </button>
       </div>
       {% endfor %}
-      <div class="row">
-         <div class="col-xl-3 col-md-6">
-            <div class="card bg-primary text-white mb-4">
-               <div class="card-body">Education</div>
-               <div class="card-footer d-flex align-items-center justify-content-between">
-                  <a class="small text-white stretched-link" href="#">View Details</a>
-                  <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-               </div>
-            </div>
-         </div>
-         <div class="col-xl-3 col-md-6">
-            <div class="card bg-warning text-white mb-4">
-               <div class="card-body">Health</div>
-               <div class="card-footer d-flex align-items-center justify-content-between">
-                  <a class="small text-white stretched-link" href="#">View Details</a>
-                  <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-               </div>
-            </div>
-         </div>
-         <div class="col-xl-3 col-md-6">
-            <div class="card bg-success text-white mb-4">
-               <div class="card-body">Leaves</div>
-               <div class="card-footer d-flex align-items-center justify-content-between">
-                  <a class="small text-white stretched-link" href="#">View Details</a>
-                  <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-               </div>
-            </div>
-         </div>
-      </div>
+
       <div class="card mb-4">
          <div class="card-header">
             <i class="fas fa-table me-1"></i>
@@ -76,6 +48,14 @@
                <dd class="col-sm-9">{{ orphan.contact_number }}</dd>
                <dt class="col-sm-3">Ethnicity:</dt>
                <dd class="col-sm-9">{{ orphan.ethnicity }}</dd>
+               <dt class="col-sm-3">Siblings:</dt>
+              <dd class="col-sm-9">
+    {% if orphan.siblings.all %}
+        {{ orphan.siblings.all|join:", " }}
+    {% else %}
+        None
+    {% endif %}
+</dd>
                <dt class="col-sm-3">Nationality:</dt>
                <dd class="col-sm-9">{{ orphan.nationality }}</dd>
                <dt class="col-sm-3">Religion:</dt>
@@ -92,6 +72,18 @@
                <dd class="col-sm-9">{{ orphan.special_needs }}</dd>
                <dt class="col-sm-3">Family Status:</dt>
                <dd class="col-sm-9">{{ orphan.family_status }}</dd>
+                <dt class="col-sm-3">Picture Preview</dt>
+               <dd class="col-sm-9">
+                  {% if orphan.orphan_picture %}
+                  {% if "image" in orphan.orphan_picture.content_type %}
+                  <img src="{{ orphan.orphan_picture.url }}" alt="BForm" style="max-width: 100%; max-height: 200px; border-radius: 5px;">
+                  {% else %}
+                  <a href="{{ orphan.orphan_picture.url }}" target="_blank">Open File</a>
+                  {% endif %}
+                  {% else %}
+                  No file available
+                  {% endif %}
+               </dd>
                <dt class="col-sm-3">BForm</dt>
                <dd class="col-sm-9">
                   {% if orphan.bform_picture %}

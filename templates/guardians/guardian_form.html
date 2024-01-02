@@ -1,0 +1,109 @@
+{% if user.is_authenticated %}
+{% include "header.html" %}
+{% include "sidenav.html" %}
+<div id="layoutSidenav_content">
+<main>
+   <div class="container-fluid px-4">
+      <h1 class="mt-4">Create Guardian</h1>
+      {% for message in messages %}
+      <div class="alert alert-dismissible fade show {% if message.tags == 'success' %}alert-success{% elif message.tags == 'error' %}alert-danger{% endif %}" role="alert" id="alertMessage">
+         <strong>Alert:</strong> {{ message }}
+         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+         <span aria-hidden="true">&times;</span>
+         </button>
+      </div>
+      {% endfor %}
+      <div class="card mb-4">
+         <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+            Guardian form
+         </div>
+         {% block content %}
+         <div class="card-body">
+            <form method="post" enctype="multipart/form-data">
+               {% csrf_token %}
+               <div class="row">
+                  <!-- Left side -->
+                  <div class="col-md-3">
+                     <div class="form-floating mb-3">
+                        <input class="form-control" type="text" id="{{ form.first_name.id_for_label }}" name="{{ form.first_name.name }}" required>
+                        <label for="{{ form.first_name.id_for_label }}">{{ form.first_name.label }}</label>
+                     </div>
+                     <div class="form-floating mb-3">
+                        <input class="form-control" type="text" id="{{ form.last_name.id_for_label }}" name="{{ form.last_name.name }}" required>
+                        <label for="{{ form.last_name.id_for_label }}">{{ form.last_name.label }}</label>
+                     </div>
+                     <div class="form-floating mb-3">
+                        <input class="form-control" type="email" id="{{ form.email.id_for_label }}" name="{{ form.email.name }}" required>
+                        <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+                     </div>
+                     <div class="form-floating mb-3">
+                        <input class="form-control" type="text" id="{{ form.phone_number.id_for_label }}" name="{{ form.phone_number.name }}" required>
+                        <label for="{{ form.phone_number.id_for_label }}">{{ form.phone_number.label }}</label>
+                     </div>
+                  </div>
+                  <div class="col-md-3">
+                     <div class="form-floating mb-3">
+                        <input class="form-control" type="text" id="{{ form.address.id_for_label }}" name="{{ form.address.name }}" required>
+                        <label for="{{ form.address.id_for_label }}">{{ form.address.label }}</label>
+                     </div>
+                     <div class="form-floating mb-3">
+                        <input class="form-control" type="text" id="{{ form.cnic.id_for_label }}" name="{{ form.cnic.name }}" required>
+                        <label for="{{ form.cnic.id_for_label }}">{{ form.cnic.label }}</label>
+                     </div>
+                     <div class="form-floating mb-3">
+                        <input class="form-control" type="text" id="{{ form.occupation.id_for_label }}" name="{{ form.occupation.name }}" required>
+                        <label for="{{ form.occupation.id_for_label }}">{{ form.occupation.label }}</label>
+                     </div>
+                     <div class="form-floating mb-3">
+                        <input class="form-control" type="text" id="{{ form.relationship.id_for_label }}" name="{{ form.relationship.name }}" required>
+                        <label for="{{ form.relationship.id_for_label }}">{{ form.relationship.label }}</label>
+                     </div>
+                  </div>
+                  <div class="col-md-3">
+                     <div class="form-floating mb-3">
+                        <input class="form-control" type="text" id="{{ form.date_of_birth.id_for_label }}" name="{{ form.date_of_birth.name }}" required>
+                        <label for="{{ form.date_of_birth.id_for_label }}">{{ form.date_of_birth.label }}</label>
+                     </div>
+                     <div class="form-floating mb-3">
+                        <select class="form-select" id="{{ form.gender.id_for_label }}" name="{{ form.gender.name }}" required>
+                           <option value="" disabled selected>Select gender</option>
+                           {% for value, label in form.gender.field.choices %}
+                           <option value="{{ value }}">{{ label }}</option>
+                           {% endfor %}
+                        </select>
+                        <label for="{{ form.gender.id_for_label }}">{{ form.gender.label }}</label>
+                     </div>
+                     <div class="form-floating mb-3">
+                        <input class="form-control" type="file" id="{{ form.guardian_picture.id_for_label }}" name="{{ form.guardian_picture.name }}" accept="image/*" >
+                        <label for="{{ form.guardian_picture.id_for_label }}">{{ form.guardian_picture.label }}</label>
+                     </div>
+                     <div class="form-floating mb-3">
+                        <input class="form-control" type="file" id="{{ form.stamp_paper.id_for_label }}" name="{{ form.stamp_paper.name }}" accept="image/*" >
+                        <label for="{{ form.stamp_paper.id_for_label }}">{{ form.stamp_paper.label }}</label>
+                     </div>
+                  </div>
+                  <div class="col-md-3">
+                     <div class="form-floating mb-3">
+                        <input class="form-control" type="file" id="{{ form.cnic_picture.id_for_label }}" name="{{ form.cnic_picture.name }}" accept="image/*" >
+                        <label for="{{ form.cnic_picture.id_for_label }}">{{ form.cnic_picture.label }}</label>
+                     </div>
+                     <!-- Right side -->
+                     <!-- Right side -->
+                     <!-- Add other fields here following the example -->
+                  </div>
+                  <!-- Add other fields here following the example -->
+                  <div class="col-md-3">
+                     <div class="d-grid">
+                        <button class="btn btn-primary btn-block" type="submit">Submit</button>
+                     </div>
+                  </div>
+               </div>
+            </form>
+         </div>
+         {% endblock %}
+      </div>
+   </div>
+</main>
+{% include "footer.html" %}
+{% endif %}

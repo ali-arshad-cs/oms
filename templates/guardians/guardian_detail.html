@@ -1,0 +1,125 @@
+{% if user.is_authenticated %}
+{% include "header.html" %}
+{% include "sidenav.html" %}
+<div id="layoutSidenav_content">
+<main>
+   <div class="container-fluid px-4">
+
+      <h2 class="mt-4">{{ guardian.first_name }} {{ guardian.last_name }}  Details</h2>
+      <ol class="breadcrumb mb-4">
+         <li class="breadcrumb-item active">OMS Dashboard</li>
+      </ol>
+      {% for message in messages %}
+      <div class="alert alert-dismissible fade show {% if message.tags == 'success' %}alert-success{% elif message.tags == 'error' %}alert-danger{% endif %}" role="alert" id="alertMessage">
+         <strong>Alert:</strong> {{ message }}
+         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+         <span aria-hidden="true">&times;</span>
+         </button>
+      </div>
+      {% endfor %}
+
+      <div class="card mb-4">
+         <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+            Details
+         </div>
+         <div class="card-body">
+            {% block content %}
+            <dl class="row">
+                <dt class="col-sm-3">Picture:</dt>
+               <dd class="col-sm-9" style="text-align: center;">
+    {% if guardian.guardian_picture %}
+        <div style="width: 150px; height: 200px; overflow: hidden; border: 1px solid #ccc; border-radius: 5px;">
+            <img src="{{ guardian.guardian_picture.url }}" alt="Picture" style="width: 100%; height: 100%; object-fit: cover; border-radius: 5px;">
+        </div>
+    {% else %}
+        None
+    {% endif %}
+</dd>
+
+               </dd>
+               <dt class="col-sm-3">First Name:</dt>
+               <dd class="col-sm-9">{{ guardian.first_name }} {{ guardian.last_name }}</dd>
+
+               <dt class="col-sm-3">Last Name:</dt>
+               <dd class="col-sm-9">{{ guardian.email }}</dd>
+
+               <dt class="col-sm-3">Phone Number:</dt>
+               <dd class="col-sm-9">{{ guardian.phone_number }}</dd>
+
+               <dt class="col-sm-3">Address:</dt>
+               <dd class="col-sm-9">{{ guardian.address }}</dd>
+
+               <dt class="col-sm-3">CNIC:</dt>
+               <dd class="col-sm-9">{{ guardian.cnic }}</dd>
+
+               <dt class="col-sm-3">Occupation:</dt>
+               <dd class="col-sm-9">{{ guardian.occupation }}</dd>
+
+               <dt class="col-sm-3">Relationship:</dt>
+               <dd class="col-sm-9">{{ guardian.relationship }}</dd>
+
+               <dt class="col-sm-3">DOB:</dt>
+               <dd class="col-sm-9">{{ guardian.date_of_birth }}</dd>
+
+               <dt class="col-sm-3">Gender:</dt>
+               <dd class="col-sm-9">{{ guardian.gender }}</dd>
+
+               <dt class="col-sm-3">Picture:</dt>
+               <dd class="col-sm-9">
+                  {% if guardian.guardian_picture %}
+                  {% if "image" in guardian.guardian_picture.content_type %}
+                  <img src="{{ guardian.guardian_picture.url }}" alt="Admission with Guardian" style="max-width: 100%; max-height: 200px; border-radius: 5px;">
+                  {% else %}
+                  <a href="{{ guardian.guardian_picture.url }}" target="_blank">Open File</a>
+                  {% endif %}
+                  {% else %}
+                  No file available
+                  {% endif %}
+               </dd>
+               <dt class="col-sm-3">Stamp Paper:</dt>
+               <dd class="col-sm-9">
+                  {% if guardian.stamp_paper %}
+                  {% if "image" in guardian.stamp_paper.content_type %}
+                  <img src="{{ guardian.stamp_paper.url }}" alt="Admission with Guardian" style="max-width: 100%; max-height: 200px; border-radius: 5px;">
+                  {% else %}
+                  <a href="{{ guardian.stamp_paper.url }}" target="_blank">Open File</a>
+                  {% endif %}
+                  {% else %}
+                  No file available
+                  {% endif %}
+               </dd>
+
+
+
+               <dt class="col-sm-3">CNIC Picture:</dt>
+               <dd class="col-sm-9">
+                  {% if guardian.cnic_picture %}
+                  {% if "image" in guardian.cnic_picture.content_type %}
+                  <img src="{{ guardian.cnic_picture.url }}" alt="Admission with Guardian" style="max-width: 100%; max-height: 200px; border-radius: 5px;">
+                  {% else %}
+                  <a href="{{ guardian.cnic_picture.url }}" target="_blank">Open File</a>
+                  {% endif %}
+                  {% else %}
+                  No file available
+                  {% endif %}
+               </dd>
+
+
+
+
+                              <!-- Add other fields as needed -->
+            </dl>
+            <!-- Example: Link to edit orphan -->
+            {% endblock %}
+         </div>
+         <div class="card-footer">
+            <a href="{% url 'guardians:guardian_update' pk=guardian.pk %}" class="btn btn-primary">Edit</a>
+            <a href="{% url 'guardians:guardian_delete' pk=guardian.pk %}" class="btn btn-danger">Delete</a>
+            <a href="{% url 'guardians:guardian_list' %}" class="btn btn-secondary">Go Back</a>
+         </div>
+      </div>
+   </div>
+</main>
+{% include "footer.html" %}
+{% endif %}
