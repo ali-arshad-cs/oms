@@ -126,7 +126,8 @@
         var result = confirm("Are you sure you want to delete the guardian?");
         if (result) {
             // If the user clicks "OK" in the confirmation popup, proceed with the deletion
-            window.location.href = "{% url 'guardians:guardian_delete' pk='{}' %}".replace('{}', guardianId);
+            var deleteUrl = "{% url 'guardians:guardian_delete' pk='{}' %}".replace('{}', guardianId);
+            window.location.href = deleteUrl;
         }
     }
 </script>
