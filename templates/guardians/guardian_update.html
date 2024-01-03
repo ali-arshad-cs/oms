@@ -63,9 +63,10 @@
                   </div>
                   <div class="col-md-3">
                      <div class="form-floating mb-3">
-                        <input class="form-control" type="date" id="{{ form.date_of_birth.id_for_label }}" name="{{ form.date_of_birth.name }}" value="{{ form.instance.date_of_birth }}">
+                        <input class="form-control" type="date" id="{{ form.date_of_birth.id_for_label }}" name="{{ form.date_of_birth.name }}" value="{% if form.instance.date_of_birth %}{{ form.instance.date_of_birth|date:'Y-m-d' }}{% endif %}">
                         <label for="{{ form.date_of_birth.id_for_label }}">{{ form.date_of_birth.label }}</label>
                      </div>
+
                      <div class="form-floating mb-3">
                         <select class="form-select" id="{{ form.gender.id_for_label }}" name="{{ form.gender.name }}">
                         <option value="" disabled {% if not form.instance.gender %}selected{% endif %}>Select gender</option>
