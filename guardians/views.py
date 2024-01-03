@@ -17,15 +17,17 @@ def guardian_detail(request, pk):
 
 def guardian_create(request):
     if request.method == 'POST':
-        form = GuardianForm(request.POST, request.FILES)  # Use your GuardianForm
+        form = GuardianForm(request.POST, request.FILES)
         if form.is_valid():
             guardian = form.save()
             messages.success(request, 'Guardian created successfully!')
             return redirect('guardians:guardian_detail', pk=guardian.pk)
         else:
-            messages.error(request, 'Error in the form submission. Please check the input.')
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, f"Error creating guardian: {field.capitalize()} - {error}")
     else:
-        form = GuardianForm()  # Use your GuardianForm
+        form = GuardianForm()
 
     return render(request, 'guardians/guardian_form.html', {'form': form, 'action': 'Create'})
 
@@ -34,17 +36,20 @@ def guardian_update(request, pk):
     guardian = get_object_or_404(Guardian, pk=pk)
 
     if request.method == 'POST':
-        form = GuardianForm(request.POST, instance=guardian)  # Use your GuardianForm
+        form = GuardianForm(request.POST, request.FILES, instance=guardian)
         if form.is_valid():
             guardian = form.save()
             messages.success(request, 'Guardian updated successfully.')
             return redirect('guardians:guardian_detail', pk=guardian.pk)
         else:
-            messages.error(request, 'Error in the form submission. Please check the input.')
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, f"Error updating guardian: {field.capitalize()} - {error}")
     else:
-        form = GuardianForm(instance=guardian)  # Use your GuardianForm
+        form = GuardianForm(instance=guardian)
 
     return render(request, 'guardians/guardian_update.html', {'form': form, 'action': 'Update'})
+
 
 
 def guardian_delete(request, pk):

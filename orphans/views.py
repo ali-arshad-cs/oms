@@ -58,7 +58,7 @@ def orphan_create(request):
 def orphan_update(request, pk):
     orphan = get_object_or_404(Orphan, pk=pk)
     if request.method == 'POST':
-        form = OrphanForm(request.POST, instance=orphan)
+        form = OrphanForm(request.POST, request.FILES, instance=orphan)
         if form.is_valid():
             orphan = form.save()
             messages.success(request, 'Orphan updated successfully.')

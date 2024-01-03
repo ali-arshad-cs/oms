@@ -60,7 +60,7 @@
                   <!-- Right side -->
                   <div class="col-md-3">
                    <div class="form-floating mb-3">
-    <select class="form-select" id="{{ form.guardian.id_for_label }}" name="{{ form.guardian.name }}">
+    <select class="form-select" id="{{ form.guardian.id_for_label }}" name="{{ form.guardian.name }}" required>
         <option value="" disabled {% if not form.instance.guardian %}selected{% endif %}>Select guardian</option>
         {% for value, label in form.guardian.field.choices %}
             <option value="{{ value }}" {% if form.instance.guardian == value %}selected{% endif %}>{{ label }}</option>
