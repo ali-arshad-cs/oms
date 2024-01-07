@@ -7,7 +7,8 @@ from django.contrib import messages
 
 def guardian_list(request):
     guardians = Guardian.objects.all()
-    return render(request, 'guardians/guardian_list.html', {'guardians': guardians})
+    sorted_guardians = sorted(guardians, key=lambda x: x.first_name)
+    return render(request, 'guardians/guardian_list.html', {'guardians': sorted_guardians})
 
 
 def guardian_detail(request, pk):

@@ -26,6 +26,8 @@ def home(request):
 
 
 def signup(request):
+    if request.user.is_authenticated:
+        return redirect("authentication:home")
     page_title = title_mapping().get('signup', 'Al Saira')
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
@@ -45,16 +47,24 @@ def signup(request):
 
 
 def signin(request):
+    # Check if the user is already logged in
+    if request.user.is_authenticated:
+        return redirect("authentication:home")  # Redirect to the home page if the user is already logged in
+
     page_title = title_mapping().get('signin', 'Al Saira')
+
     if request.method == "POST":
         username = request.POST["username"]
         password = request.POST["pass1"]
         user = authenticate(username=username, password=password)
+
         if user is not None:
             login(request, user)
-            return redirect("authentication:home")  # Redirect to the home page or any desired page after successful login
+            return redirect(
+                "authentication:home")  # Redirect to the home page or any desired page after successful login
         else:
             messages.error(request, "Invalid username or password. Please try again.")
+
     return render(request, "authentication/signin.html", {'page_title': page_title})
 
 
