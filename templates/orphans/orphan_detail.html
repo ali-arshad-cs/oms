@@ -18,7 +18,7 @@
             <div class="card">
                <div class="card-body">
                   <div class="d-flex flex-column align-items-center text-center">
-                     <img src="/media/shared_images/kid.png" alt="Admin" class="" width="250">
+                     <img src="{{ orphan.orphan_picture.url }}" alt="Admin" class="" width="250">
                      <div class="mt-3">
                         <h4>{{ orphan.first_name }} {{ orphan.last_name }}</h4>
                         <p class="text-secondary mb-1">Age : {{ orphan.age }} years</p>
@@ -213,7 +213,7 @@
    .main-body {
    padding: 15px;
    margin-top: 40px;
-   margin-left: 40px;
+   margin-left: 120px;
    }
    .card {
    box-shadow: 0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.06);
