@@ -1,6 +1,9 @@
+from django.contrib.auth.models import User
 from django.db import models
 from guardians.models import Guardian  # Import Guardian here
 from datetime import date
+
+from oms import settings
 
 
 class Orphan(models.Model):
@@ -53,9 +56,14 @@ class Orphan(models.Model):
     bform_picture = models.ImageField(upload_to='shared_images/', null=True, blank=True)
     picture_at_time_of_admission = models.ImageField(upload_to='shared_images/', null=True, blank=True)
     siblings = models.ManyToManyField('self', blank=True, symmetrical=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    modified_at = models.DateTimeField(auto_now=True)
+
 
     #FOREIGN KEYS FIELDS
     guardian = models.ForeignKey(Guardian, on_delete=models.CASCADE, related_name='orphans', null=True, blank=True)
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
+
     # health_record = models.OneToOneField(HealthRecord, on_delete=models.SET_NULL, null=True, blank=True)
     # education_info = models.ForeignKey(Education, on_delete=models.SET_NULL, null=True, blank=True)
     # guardian = models.ForeignKey(Guardian, on_delete=models.CASCADE)
@@ -69,6 +77,7 @@ class Orphan(models.Model):
         today = date.today()
         return today.year - self.date_of_birth.year - (
                     (today.month, today.day) < (self.date_of_birth.month, self.date_of_birth.day))
+
 
     def time_spent(self):
         if self.admission_date is None:

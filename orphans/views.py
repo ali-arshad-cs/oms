@@ -41,7 +41,9 @@ def orphan_create(request):
     if request.method == 'POST':
         form = OrphanForm(request.POST, request.FILES)
         if form.is_valid():
-            orphan = form.save()
+            orphan = form.save(commit=False)
+            orphan.created_by = request.user
+            orphan.save()
             messages.success(request, 'Orphan created successfully!')
             return redirect('orphans:orphan_detail', pk=orphan.pk)
         else:
@@ -60,7 +62,9 @@ def orphan_update(request, pk):
     if request.method == 'POST':
         form = OrphanForm(request.POST, request.FILES, instance=orphan)
         if form.is_valid():
-            orphan = form.save()
+            orphan = form.save(commit=False)
+            orphan.created_by = request.user
+            orphan.save()
             messages.success(request, 'Orphan updated successfully.')
             return redirect('orphans:orphan_detail', pk=orphan.pk)
         else:
@@ -71,6 +75,8 @@ def orphan_update(request, pk):
         form = OrphanForm(instance=orphan)
 
     return render(request, 'orphans/orphan_update.html', {'form': form, 'action': 'Update'})
+
+
 
 
 @login_required
