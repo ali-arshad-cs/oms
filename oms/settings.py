@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'authentication',
     'orphans',
+    'guardians',
 ]
 
 MIDDLEWARE = [
@@ -58,6 +59,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'oms.urls'
+
+TIME_ZONE = "Asia/Karachi"
 
 TEMPLATES = [
     {
