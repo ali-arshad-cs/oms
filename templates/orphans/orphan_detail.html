@@ -24,8 +24,9 @@
                         <p class="text-secondary mb-1">Age : {{ orphan.age }} years</p>
                         <p class="text-secondary mb-1">Duration : {{ orphan.time_spent }} </p>
                         <p class="text-muted font-size-sm">{{ orphan.address }}</p>
-                        <button class="btn btn-primary">Edit Profile</button>
-                        <button class="btn btn-outline-danger">Delete</button>
+                        <button onclick="window.location.href='{% url 'orphans:orphan_update' pk=orphan.pk %}'" class="btn btn-primary">Edit Profile</button>
+                        <button onclick="window.location.href='{% url 'orphans:orphan_delete' pk=orphan.pk %}'" class="btn btn-outline-danger">Delete</button>
+
                      </div>
                   </div>
                </div>
@@ -99,23 +100,30 @@
                         <h5 class="card-title mb-4">Biographical Information</h5>
                         <ul class="list-group list-group-flush">
                            <li class="list-group-item">
-                              <strong>DOB:</strong> Jan. 2 1988
+                              <strong>DOB:</strong> {{ orphan.date_of_birth }}
                            </li>
                            <li class="list-group-item">
-                              <strong>Gender:</strong> Male
+                              <strong>Gender:</strong> {{ orphan.gender }}
                            </li>
                            <li class="list-group-item">
-                              <strong>Nationality:</strong> 8
+                              <strong>Nationality:</strong> {{ orphan.nationality }}
                            </li>
                            <li class="list-group-item">
-                              <strong>Religion:</strong> Islam
+                              <strong>Religion:</strong> {{ orphan.religion }}
                            </li>
                            <li class="list-group-item">
-                              <strong>Special Needs:</strong> NO
+                              <strong>Special Needs:</strong> {{ orphan.special_needs }}
                            </li>
                            <li class="list-group-item">
-                              <strong>Bloog Group:</strong> B+
+                              <strong>Bloog Group:</strong>
                            </li>
+                             <li class="list-group-item">
+                              <strong>Language:</strong> {{ orphan.language }}
+                           </li>
+                             <li class="list-group-item">
+                              <strong>Hobbies:</strong> {{ orphan.hobbies }}
+                           </li>
+
                         </ul>
                      </div>
                   </div>
@@ -126,19 +134,30 @@
                         <h5 class="card-title mb-4">Family Background</h5>
                         <ul class="list-group list-group-flush">
                            <li class="list-group-item">
-                              <strong>Guardian Name: </strong> Baji Hanji
+                              <strong>Guardian Name: </strong>  {% if orphan.guardian %}
+                        <a href="{% url 'guardians:guardian_detail' pk=orphan.guardian.id %}">
+                        {{ orphan.guardian }}
+                        </a>
+                        {% else %}
+
+                        {% endif %}
                            </li>
                            <li class="list-group-item">
-                              <strong>Family Status:</strong> Broken Family
+                              <strong>Family Status:</strong> {{ orphan.family_status }}
                            </li>
                            <li class="list-group-item">
-                              <strong>Emergency Number:</strong> 0333-8737377
+                              <strong>Emergency Number:</strong> {{ orphan.contact_number }}
                            </li>
                            <li class="list-group-item">
-                              <strong>Siblings:</strong> Ayesha
+                              <strong>Siblings:</strong> {% if orphan.siblings.all %}
+                        <a href="{% url 'orphans:orphan_detail' pk=orphan.siblings.first.pk %}">
+                        {{ orphan.siblings.all|join:", " }}
+                        </a>
+                        {% else %}
+                        {% endif %}
                            </li>
                            <li class="list-group-item">
-                              <strong>Notes:</strong> This is a text
+                              <strong>Notes:</strong> {{ orphan.notes }}
                            </li>
                         </ul>
                      </div>
@@ -156,16 +175,16 @@
                               <strong>Status: </strong> <span style="color: green;"><b>Onboarded</b></span>
                            </li>
                             <li class="list-group-item">
-                              <strong>Roll #: </strong> B013
+                              <strong>Roll #: </strong>
                            </li>
                            <li class="list-group-item">
-                              <strong>Admission Date:</strong> Jan. 5 1988
+                              <strong>Admission Date:</strong> {{ orphan.admission_date }}
                            </li>
                            <li class="list-group-item">
-                              <strong>Duration:</strong> 4 months
+                              <strong>Duration:</strong> {{ orphan.time_spent }}
                            </li>
                            <li class="list-group-item">
-                              <strong>Discharge Date:</strong> Jan. 5 1988
+                              <strong>Discharge Date:</strong> {{ orphan.discharge_date }}
                            </li>
                         </ul>
                      </div>
