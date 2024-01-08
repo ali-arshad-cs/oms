@@ -182,12 +182,12 @@
                            <li class="list-group-item">
                               <strong>Admission Date:</strong> {{ orphan.admission_date }}
                            </li>
-                           <li class="list-group-item">
-                              <strong>Duration:</strong> {{ orphan.time_spent }}
-                           </li>
-                           <li class="list-group-item">
+                           {% if orphan.discharge_date %}
+                            <li class="list-group-item">
                               <strong>Discharge Date:</strong> {{ orphan.discharge_date }}
                            </li>
+                             {% else %}
+                            {% endif %}
 
                             <li class="list-group-item">
                               <strong>Data Entered By:</strong> {{ orphan.created_by }}
