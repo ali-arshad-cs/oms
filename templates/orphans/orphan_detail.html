@@ -42,7 +42,10 @@
                         </svg>
                         Orphan Picture
                      </h6>
+                       {% if orphan.orphan_picture %}
                      <span class="text-secondary"><a href="{{ orphan.orphan_picture.url }}" target="_blank">Open File</a></span>
+                  {% else %}
+                     {% endif %}
                   </li>
                   <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                      <h6 class="mb-0">
@@ -68,7 +71,7 @@
                         </svg>
                         Admission Form
                      </h6>
-                     {% if orphan.bform_picture %}
+                     {% if orphan.admission_form_picture %}
                      <span class="text-secondary"><a href="{{ orphan.admission_form_picture.url }}" target="_blank">Open File</a></span>
                      {% else %}
                      {% endif %}
@@ -217,14 +220,23 @@
                            </li>
     <br> <br>
 
-    <button type="button" class="btn btn-primary">View Education Details</button>
+   <button type="button" class="btn btn-primary">
+  <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+  View Education Details
+</button>
                         <br>
 
 
-    <button type="button" class="btn btn-secondary">View Health Details</button>
+  <button type="button" class="btn btn-secondary">
+  <i class="fas fa-heartbeat"></i>
+  View Health Details
+</button>
                         <br>
 
-    <button type="button" class="btn btn-success">View Total Leaves</button>
+   <button type="button" class="btn btn-success">
+  <i class="fas fa-children"></i>
+  View Total Leaves
+</button>
 
 
 
