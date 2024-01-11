@@ -12,7 +12,8 @@ from django.contrib.auth.decorators import login_required
 def orphan_list(request):
     page_title = title_mapping().get('orphan_list', 'Al Saira')
 
-    orphans = Orphan.objects.all()
+    orphans = Orphan.objects.order_by('first_name').order_by('-status')
+
     onboard_orphans = orphans.filter(status='onboard')
     total_onboard_female_orphans = onboard_orphans.filter(gender='female').count()
     total_onboard_male_orphans = onboard_orphans.filter(gender='male').count()
