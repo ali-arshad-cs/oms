@@ -67,6 +67,7 @@ def orphan_update(request, pk):
             orphan = form.save(commit=False)
             orphan.created_by = request.user
             orphan.save()
+            form.save_m2m()
             messages.success(request, 'Orphan updated successfully.')
             return redirect('orphans:orphan_detail', pk=orphan.pk)
         else:
