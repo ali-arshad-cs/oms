@@ -12,7 +12,7 @@ from django.contrib.auth.decorators import login_required
 def orphan_list(request):
     page_title = title_mapping().get('orphan_list', 'Al Saira')
 
-    orphans = Orphan.objects.order_by('first_name').order_by('-status')
+    orphans = Orphan.objects.order_by('first_name', 'status')
 
     onboard_orphans = orphans.filter(status='onboard')
     total_onboard_female_orphans = onboard_orphans.filter(gender='female').count()
@@ -45,6 +45,7 @@ def orphan_create(request):
             orphan = form.save(commit=False)
             orphan.created_by = request.user
             orphan.save()
+            form.save_m2m()
             messages.success(request, 'Orphan created successfully!')
             return redirect('orphans:orphan_detail', pk=orphan.pk)
         else:

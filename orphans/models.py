@@ -59,15 +59,10 @@ class Orphan(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
 
-
     #FOREIGN KEYS FIELDS
     guardian = models.ForeignKey(Guardian, on_delete=models.CASCADE, related_name='orphans', null=True, blank=True)
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
 
-    # health_record = models.OneToOneField(HealthRecord, on_delete=models.SET_NULL, null=True, blank=True)
-    # education_info = models.ForeignKey(Education, on_delete=models.SET_NULL, null=True, blank=True)
-    # guardian = models.ForeignKey(Guardian, on_delete=models.CASCADE)
-    # leaves = models.ManyToManyField(Leave, related_name='orphans', blank=True)
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
