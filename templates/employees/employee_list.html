@@ -1,0 +1,83 @@
+{% if user.is_authenticated %}
+{% include "header.html" %}
+{% include "sidenav.html" %}
+<div id="layoutSidenav_content">
+<main>
+   <div class="container-fluid px-4">
+      <h1 class="mt-4">Employee List</h1>
+      <ol class="breadcrumb mb-4">
+         <li class="breadcrumb-item active">OMS Dashboard</li>
+      </ol>
+      {% for message in messages %}
+      <div class="alert alert-dismissible fade show {% if message.tags == 'success' %}alert-success{% elif message.tags == 'error' %}alert-danger{% endif %}" role="alert" id="alertMessage">
+         <strong>Alert:</strong> {{ message }}
+         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+         <span aria-hidden="true">&times;</span>
+         </button>
+      </div>
+      {% endfor %}
+
+      <div class="card mb-4">
+         <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+            Employee DataTable
+         </div>
+         <div class="card-body">
+            <table id="datatablesSimple" class="table">
+               <thead>
+                  <tr>
+                     <th>Employee ID</th>
+                     <th>Full Name</th>
+                     <th>Phone</th>
+                     <th>Position</th>
+                     <th>Emergency #</th>
+                     <th>Status</th>
+                     <th>DOB</th>
+                     <th>Hire Date</th>
+                     <th>Duration</th>
+                     <th>Date Left</th>
+                     <!-- Add other columns as needed -->
+                  </tr>
+               </thead>
+               <tfoot>
+                  <tr>
+                     <th>Employee ID</th>
+                     <th>Full Name</th>
+                     <th>Phone</th>
+                     <th>Position</th>
+                     <th>Emergency #</th>
+                     <th>Status</th>
+                     <th>DOB</th>
+                     <th>Hire Date</th>
+                     <th>Duration</th>
+                     <th>Date Left</th>
+                     <!-- Add other columns as needed -->
+                  </tr>
+               </tfoot>
+               <tbody>
+                  {% for employee in employees %}
+                  <tr>
+                     <td>{{ employee.id }}</td>
+
+    <td><a href="{% url 'employees:employee_detail' pk=employee.pk %}">{{ employee.full_name }}</a></td>
+    <!-- Add other columns as needed -->
+                     <td>{{ employee.phone_number }}</td>
+                     <td>{{ employee.position }}</td>
+                     <td>{{ employee.emergency_contact_number }}</td>
+                     <td>{{ employee.is_active }}</td>
+                     <td>{{ employee.date_of_birth }}</td>
+                     <td>{{ employee.hire_date }}</td>
+                     <td></td>
+                     <td>{{ employee.date_left }}</td>
+
+                     <!-- Add other columns as needed -->
+                  </tr>
+                  {% endfor %}
+               </tbody>
+            </table>
+         </div>
+      </div>
+   </div>
+</main>
+{% include "footer.html" %}
+{% endif %}
