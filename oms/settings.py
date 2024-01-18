@@ -32,7 +32,7 @@ SECRET_KEY = 'django-insecure-d*5fjc^ltn=+2k6t61o=5c!-svx3dbb^3)_*_wm7ui28p-xvl$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['alsairawelfarefoundation.org', 'www.alsairawelfarefoundation.org', '173.61.38.121', 'localhost', '127.0.0.1','www.shadowserver.org']
 
 # Application definition
 
