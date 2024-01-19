@@ -1,0 +1,100 @@
+{% if user.is_authenticated %}
+{% include "header.html" %}
+{% include "sidenav.html" %}
+<div id="layoutSidenav_content">
+<main>
+   <div class="container-fluid px-4">
+
+      <h1 class="mt-4">Create Employee Salary</h1>
+       {% for message in messages %}
+            <div class="alert alert-dismissible fade show {% if message.tags == 'success' %}alert-success{% elif message.tags == 'error' %}alert-danger{% endif %}" role="alert" id="alertMessage">
+               <strong>Alert:</strong> {{ message }}
+               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+               </button>
+            </div>
+            {% endfor %}
+      <div class="card mb-4">
+         <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+            Register form
+         </div>
+         {% block content %}
+         <div class="card-body">
+            <form method="post" enctype="multipart/form-data">
+               {% csrf_token %}
+               <div class="row">
+                  <!-- Left side -->
+                  <div class="col-md-3">
+                  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+   <div class="form-floating mb-3">
+    {{ form.employee }}
+
+</div>
+
+    <div class="form-floating mb-3">
+        <input class="form-control" type="date" id="{{ form.month.id_for_label }}" name="{{ form.month.name }}" required>
+        <label for="{{ form.month.id_for_label }}">{{ form.month.label }}</label>
+    </div>
+
+    <div class="form-floating mb-3">
+        <input class="form-control" type="text" id="{{ form.notes.id_for_label }}" name="{{ form.notes.name }}">
+        <label for="{{ form.notes.id_for_label }}">{{ form.notes.label }}</label>
+    </div>
+
+    <div class="form-floating mb-3">
+        <input class="form-control" type="text" id="{{ form.salary_amount.id_for_label }}" name="{{ form.salary_amount.name }}" required>
+        <label for="{{ form.salary_amount.id_for_label }}">{{ form.salary_amount.label }}</label>
+    </div>
+
+    <div class="form-floating mb-3">
+        <input class="form-control" type="text" id="{{ form.bonus_amount.id_for_label }}" name="{{ form.bonus_amount.name }}">
+        <label for="{{ form.bonus_amount.id_for_label }}">{{ form.bonus_amount.label }}</label>
+    </div>
+
+    <div class="form-floating mb-3">
+        <input class="form-control" type="text" id="{{ form.deductions.id_for_label }}" name="{{ form.deductions.name }}">
+        <label for="{{ form.deductions.id_for_label }}">{{ form.deductions.label }}</label>
+    </div>
+
+    <div class="form-floating mb-3">
+        <input class="form-control" type="text" id="{{ form.net_salary.id_for_label }}" name="{{ form.net_salary.name }}">
+        <label for="{{ form.net_salary.id_for_label }}">{{ form.net_salary.label }}</label>
+    </div>
+
+    <div class="form-floating mb-3">
+        <input class="form-control" type="date" id="{{ form.salary_paid_date.id_for_label }}" name="{{ form.salary_paid_date.name }}">
+        <label for="{{ form.salary_paid_date.id_for_label }}">{{ form.salary_paid_date.label }}</label>
+    </div>
+
+    <div class="form-floating mb-3">
+        <input class="form-control" type="file" id="{{ form.salary_receipt.id_for_label }}" name="{{ form.salary_receipt.name }}">
+        <label for="{{ form.salary_receipt.id_for_label }}">{{ form.salary_receipt.label }}</label>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+
+
+                  </div>
+                  <!-- Right side -->
+                  <!-- Right side -->
+
+                  <!-- Add other fields here following the example -->
+                  <div class="col-md-3">
+                     <div class="d-grid">
+                        <button class="btn btn-primary btn-block" type="submit">Submit</button>
+                     </div>
+                  </div>
+               </div>
+            </form>
+         </div>
+         {% endblock %}
+      </div>
+   </div>
+</main>
+{% include "footer.html" %}
+{% endif %}

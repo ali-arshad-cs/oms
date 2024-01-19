@@ -9,6 +9,11 @@ class MonthlySalaryForm(forms.ModelForm):
         model = MonthlySalary
         fields = '__all__'
 
+    employee = forms.ModelChoiceField(
+        queryset=Employee.objects.all(),
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )
+
 
 class EmployeeForm(forms.ModelForm):
     class Meta:

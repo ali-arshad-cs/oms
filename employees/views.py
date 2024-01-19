@@ -36,18 +36,23 @@ def create_employee(request):
     return render(request, 'employees/employee_form.html', {'form': form})
 
 
-def update_employee(request, employee_id):
-    employee = get_object_or_404(Employee, pk=employee_id)
+def update_employee(request, pk):
+    employee = get_object_or_404(Employee, pk=pk)
 
     if request.method == 'POST':
         form = EmployeeForm(request.POST, request.FILES, instance=employee)
         if form.is_valid():
             form.save()
-            return redirect('employee_list')
+            messages.success(request, 'Employee updated successfully.')
+            return redirect('employees:employee_detail', pk=employee.pk)
+        else:
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, f"Error updating employee: {field.capitalize()} - {error}")
     else:
         form = EmployeeForm(instance=employee)
 
-    return render(request, 'employee_form.html', {'form': form})
+    return render(request, 'employees/employee_update.html', {'form': form, 'action': 'Update'})
 
 
 def delete_employee(request, employee_id):
@@ -62,51 +67,56 @@ def delete_employee(request, employee_id):
 
 # MonthlySalary Views
 
-def monthly_salary_list(request):
+def salary_list(request):
     monthly_salaries = MonthlySalary.objects.all()
-    return render(request, 'monthly_salary_list.html', {'monthly_salaries': monthly_salaries})
+    return render(request, 'employees/salary_list.html', {'monthly_salaries': monthly_salaries})
 
 
-def monthly_salary_detail(request, salary_id):
+def salary_detail(request, salary_id):
     salary = get_object_or_404(MonthlySalary, pk=salary_id)
-    return render(request, 'monthly_salary_detail.html', {'salary': salary})
+    return render(request, 'salary_detail.html', {'salary': salary})
 
 
-def create_monthly_salary(request, employee_id):
-    employee = get_object_or_404(Employee, pk=employee_id)
+def create_salary(request):
+    employees = Employee.objects.all()
 
     if request.method == 'POST':
         form = MonthlySalaryForm(request.POST, request.FILES)
         if form.is_valid():
             salary = form.save(commit=False)
-            salary.employee = employee
+
             salary.save()
-            return redirect('monthly_salary_list')
+            messages.success(request, 'Salary created successfully.')
+            return redirect('employees/salary_list')
+        else:
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, f"Error creating salary: {field.capitalize()} - {error}")
     else:
         form = MonthlySalaryForm()
 
-    return render(request, 'monthly_salary_form.html', {'form': form, 'employee': employee})
+    return render(request, 'employees/salary_form.html', {'form': form, 'employees': employees})
 
 
-def update_monthly_salary(request, salary_id):
+def update_salary(request, salary_id):
     salary = get_object_or_404(MonthlySalary, pk=salary_id)
 
     if request.method == 'POST':
         form = MonthlySalaryForm(request.POST, request.FILES, instance=salary)
         if form.is_valid():
             form.save()
-            return redirect('monthly_salary_list')
+            return redirect('salary_list')
     else:
         form = MonthlySalaryForm(instance=salary)
 
-    return render(request, 'monthly_salary_form.html', {'form': form, 'employee': salary.employee})
+    return render(request, 'salary_form.html', {'form': form, 'employee': salary.employee})
 
 
-def delete_monthly_salary(request, salary_id):
+def delete_salary(request, salary_id):
     salary = get_object_or_404(MonthlySalary, pk=salary_id)
 
     if request.method == 'POST':
         salary.delete()
-        return redirect('monthly_salary_list')
+        return redirect('salary_list')
 
     return render(request, 'monthly_salary_confirm_delete.html', {'salary': salary})

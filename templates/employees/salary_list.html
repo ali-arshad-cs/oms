@@ -1,0 +1,79 @@
+{% if user.is_authenticated %}
+{% include "header.html" %}
+{% include "sidenav.html" %}
+<div id="layoutSidenav_content">
+<main>
+   <div class="container-fluid px-4">
+      <h1 class="mt-4">Salary List</h1>
+      <ol class="breadcrumb mb-4">
+         <li class="breadcrumb-item active">OMS Dashboard</li>
+      </ol>
+      {% for message in messages %}
+      <div class="alert alert-dismissible fade show {% if message.tags == 'success' %}alert-success{% elif message.tags == 'error' %}alert-danger{% endif %}" role="alert" id="alertMessage">
+         <strong>Alert:</strong> {{ message }}
+         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+         <span aria-hidden="true">&times;</span>
+         </button>
+      </div>
+      {% endfor %}
+      <div class="card mb-4">
+         <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+            Employee DataTable
+         </div>
+         <div class="card-body">
+            <table id="datatablesSimple" class="table">
+               <thead>
+                  <tr>
+                     <th>Salary ID</th>
+                     <th>Employee</th>
+                     <th>Month</th>
+                     <th>Notes</th>
+                     <th>Salary Amount</th>
+                     <th>Bonus Amount</th>
+                     <th>Deductions</th>
+                     <th>Net Salary</th>
+                     <th>Salary Paid Date</th>
+                     <th>Salary Receipt</th>
+                     <!-- Add other columns as needed -->
+                  </tr>
+               </thead>
+               <tfoot>
+                  <tr>
+                     <th>Salary ID</th>
+                     <th>Employee</th>
+                     <th>Month</th>
+                     <th>Notes</th>
+                     <th>Salary Amount</th>
+                     <th>Bonus Amount</th>
+                     <th>Deductions</th>
+                     <th>Net Salary</th>
+                     <th>Salary Paid Date</th>
+                     <th>Salary Receipt</th>
+                     <!-- Add other columns as needed -->
+                  </tr>
+               </tfoot>
+               <tbody>
+                  {% for salary in monthly_salaries %}
+                  <tr>
+                     <td>{{ salary.salary_id }}</td>
+                     <td>{{ salary.employee }}</td>
+                     <td>{{ salary.month }}</td>
+                     <td>{{ salary.notes }}</td>
+                     <td>{{ salary.salary_amount }}</td>
+                     <td>{{ salary.bonus_amount }}</td>
+                     <td>{{ salary.deductions }}</td>
+                     <td>{{ salary.net_salary }}</td>
+                     <td>{{ salary.salary_paid_date }}</td>
+                     <td>{{ salary.salary_receipt }}</td>
+                     <!-- Add other columns as needed -->
+                  </tr>
+                  {% endfor %}
+               </tbody>
+            </table>
+         </div>
+      </div>
+   </div>
+</main>
+{% include "footer.html" %}
+{% endif %}
