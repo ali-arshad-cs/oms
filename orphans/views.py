@@ -89,7 +89,7 @@ def get_orphan_stats():
     orphans = Orphan.objects.order_by('first_name', 'status')
     orphans_in_current_month = Orphan.objects.filter(date_of_birth__month=datetime.now().month)
     onboard_orphans = orphans.filter(status='onboard')
-    orphans_in_current_month = onboard_orphans.filter(date_of_birth__month=datetime.now().month).order_by('date_of_birth')
+    orphans_in_current_month = onboard_orphans.filter(date_of_birth__month=datetime.now().month).order_by('-date_of_birth')
     total_onboard_female_orphans = onboard_orphans.filter(gender='female').count()
     total_onboard_male_orphans = onboard_orphans.filter(gender='male').count()
     total_orphans = orphans.count()
