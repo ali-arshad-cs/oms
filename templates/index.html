@@ -20,43 +20,41 @@
             <li class="breadcrumb-item active">OMS Dashboard</li>
          </ol>
          <div class="row">
-            <div class="col-xl-3 col-md-6">
-               <div class="card mb-4">
-                  <div class="card-body">Total Onboard Orphans</div>
-                  <div class="card-footer d-flex align-items-center justify-content-between">
-                    <h5>32</h5>
-                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                  </div>
-               </div>
-            </div>
-            <div class="col-xl-3 col-md-6">
-               <div class="card mb-4" style="background: pink">
-                  <div class="card-body">Total Girls</div>
-                  <div class="card-footer d-flex align-items-center justify-content-between">
-                     <h5>12</h5>
-
-                  </div>
-               </div>
-            </div>
-            <div class="col-xl-3 col-md-6">
-               <div class="card mb-4" style="background: lightblue">
-                  <div class="card-body">Total Boys</div>
-                  <div class="card-footer d-flex align-items-center justify-content-between">
-                     <h5>12</h5>
-
-                  </div>
-               </div>
-            </div>
-            <div class="col-xl-3 col-md-6">
-               <div class="card mb-4">
-                  <div class="card-body">Total Orphans From Beginning</div>
-                  <div class="card-footer d-flex align-items-center justify-content-between">
-                     <h5>66</h5>
-                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                  </div>
+         <div class="col-xl-3 col-md-6">
+            <div class="card mb-4">
+               <div class="card-body">Total Onboard Orphans</div>
+               <div class="card-footer d-flex align-items-center justify-content-between">
+                  <h5>{{ total_onboard_orphans }}</h5>
+                  <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                </div>
             </div>
          </div>
+         <div class="col-xl-3 col-md-6">
+            <div class="card mb-4" style="background: pink">
+               <div class="card-body">Total Onboard Girls</div>
+               <div class="card-footer d-flex align-items-center justify-content-between">
+                  <h5>{{ total_onboard_female_orphans }}</h5>
+               </div>
+            </div>
+         </div>
+         <div class="col-xl-3 col-md-6">
+            <div class="card mb-4" style="background: lightblue">
+               <div class="card-body">Total Onboard Boys</div>
+               <div class="card-footer d-flex align-items-center justify-content-between">
+                  <h5>{{ total_onboard_male_orphans }}</h5>
+               </div>
+            </div>
+         </div>
+         <div class="col-xl-3 col-md-6">
+            <div class="card mb-4">
+               <div class="card-body">Total Orphans From Beginning</div>
+               <div class="card-footer d-flex align-items-center justify-content-between">
+                  <h5>{{ total_orphans }}</h5>
+                  <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+               </div>
+            </div>
+         </div>
+      </div>
          <div class="row">
             <div class="col-xl-6">
                <div class="card mb-4">
@@ -69,17 +67,26 @@
                   </div>
                </div>
             </div>
-            <div class="col-xl-6">
-               <div class="card mb-4">
-                  <div class="card-header">
-                     <i class="fas fa-chart-bar me-1"></i>
-                     Bar Chart Example
-                  </div>
-                  <div class="card-body">
-                     <canvas id="myBarChart" width="100%" height="40"></canvas>
-                  </div>
-               </div>
-            </div>
+           <div class="col-xl-6">
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-chart-bar me-1"></i>
+            Upcoming Birthdays in {{ current_month }}
+        </div>
+        <div class="card-body">
+            <ul>
+                {% for orphan in orphans_in_current_month %}
+                    <li>{{ orphan.first_name }} {{ orphan.last_name }} - {{ orphan.date_of_birth|date:"F d" }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+       <div class="balloons-container">
+    <!-- Replace colored divs with the balloon image -->
+    <img src="static/img/baloon.png" alt="Balloon Image" class="balloon-image">
+</div>
+
+    </div>
+</div>
          </div>
          <div class="card mb-4">
             <div class="card-header">
@@ -571,5 +578,20 @@
          </div>
       </div>
    </main>
+      <style>
+         .balloons-container {
+    position: relative;
+    height: 100%;
+}
+
+.balloon-image {
+    position: absolute;
+    width: 150px; /* Adjust the width as needed */
+    height: auto;
+    right: 0;
+    bottom: 0;
+}
+
+      </style>
    {% include "footer.html" %}
    {% endif %}
