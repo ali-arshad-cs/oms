@@ -9,6 +9,8 @@ from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.utils.encoding import force_bytes, force_str
 from django.contrib.auth import authenticate, login, logout
+
+from orphans.views import get_orphan_stats
 from .forms import CustomUserCreationForm
 from .tokens import generate_token
 from django.shortcuts import render
@@ -22,7 +24,12 @@ from .models import CustomUser
 
 def home(request):
     page_title = title_mapping().get('home', 'Default Title')
-    return render(request, "index.html", {'page_title': page_title})
+    orphan_stats = get_orphan_stats()
+
+    return render(request, "index.html", {
+        'page_title': page_title,
+        **orphan_stats,
+    })
 
 
 def signup(request):

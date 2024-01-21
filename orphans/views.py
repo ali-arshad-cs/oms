@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Orphan
 from .forms import OrphanForm
@@ -11,23 +12,13 @@ from django.contrib.auth.decorators import login_required
 @login_required
 def orphan_list(request):
     page_title = title_mapping().get('orphan_list', 'Al Saira')
-
-    orphans = Orphan.objects.order_by('first_name', 'status')
-
-    onboard_orphans = orphans.filter(status='onboard')
-    total_onboard_female_orphans = onboard_orphans.filter(gender='female').count()
-    total_onboard_male_orphans = onboard_orphans.filter(gender='male').count()
-    total_orphans = orphans.count()
-    total_onboard_orphans = orphans.filter(status='onboard').count()
+    orphan_stats = get_orphan_stats()
 
     return render(request, 'orphans/orphan_list.html', {
-        'orphans': orphans,
-        'total_onboard_female_orphans': total_onboard_female_orphans,
-        'total_onboard_male_orphans': total_onboard_male_orphans,
-        'total_orphans': total_orphans,
-        'total_onboard_orphans': total_onboard_orphans,
         'page_title': page_title,
+        **orphan_stats,
     })
+
 
 @login_required
 def orphan_detail(request, pk):
@@ -92,3 +83,25 @@ def orphan_delete(request, pk):
         messages.error(request, 'Orphan not found.')
 
     return redirect('orphans:orphan_list')
+
+
+def get_orphan_stats():
+    orphans = Orphan.objects.order_by('first_name', 'status')
+    orphans_in_current_month = Orphan.objects.filter(date_of_birth__month=datetime.now().month)
+    onboard_orphans = orphans.filter(status='onboard')
+    orphans_in_current_month = onboard_orphans.filter(date_of_birth__month=datetime.now().month).order_by('date_of_birth')
+    total_onboard_female_orphans = onboard_orphans.filter(gender='female').count()
+    total_onboard_male_orphans = onboard_orphans.filter(gender='male').count()
+    total_orphans = orphans.count()
+    total_onboard_orphans = orphans.filter(status='onboard').count()
+    current_month = datetime.now().strftime('%B')
+
+    return {
+        'orphans': orphans,
+        'total_onboard_female_orphans': total_onboard_female_orphans,
+        'total_onboard_male_orphans': total_onboard_male_orphans,
+        'total_orphans': total_orphans,
+        'total_onboard_orphans': total_onboard_orphans,
+        'orphans_in_current_month':orphans_in_current_month,
+        'current_month':current_month,
+    }
