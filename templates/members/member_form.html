@@ -1,0 +1,129 @@
+{% if user.is_authenticated %}
+{% include "header.html" %}
+{% include "sidenav.html" %}
+<div id="layoutSidenav_content">
+<main>
+   <div class="container-fluid px-4">
+
+      <h1 class="mt-4">Create Member Form</h1>
+       {% for message in messages %}
+            <div class="alert alert-dismissible fade show {% if message.tags == 'success' %}alert-success{% elif message.tags == 'error' %}alert-danger{% endif %}" role="alert" id="alertMessage">
+               <strong>Alert:</strong> {{ message }}
+               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+               </button>
+            </div>
+            {% endfor %}
+      <div class="card mb-4">
+         <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+            Register form
+         </div>
+         {% block content %}
+         <div class="card-body">
+            <form method="post" enctype="multipart/form-data">
+               {% csrf_token %}
+               <div class="row">
+                  <!-- Left side -->
+                  <div class="col-md-6">
+                     <div class="form-group">
+                        <label for="full_name">Full Name</label>
+                        <input type="text" class="form-control" id="full_name" name="full_name" required>
+                     </div>
+                     <div class="form-group">
+                        <label for="father_name">Father's Name</label>
+                        <input type="text" class="form-control" id="father_name" name="father_name" required>
+                     </div>
+                     <div class="form-group">
+                        <label for="dob">Date of Birth</label>
+                        <input type="date" class="form-control" id="dob" name="dob">
+                     </div>
+                     <div class="form-group">
+                        <label for="qualification">Qualification</label>
+                        <input type="text" class="form-control" id="qualification" name="qualification" required>
+                     </div>
+                     <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                     </div>
+                     <div class="form-group">
+                        <label for="cnic">CNIC</label>
+                        <input type="text" class="form-control" id="cnic" name="cnic" required>
+                     </div>
+                     <div class="form-group">
+                        <label for="gender">Gender</label>
+                        <select class="form-control" id="gender" name="gender" required>
+                           <option value="M">Male</option>
+                           <option value="F">Female</option>
+                           <option value="O">Other</option>
+                        </select>
+                     </div>
+                     <div class="form-group">
+                        <label for="phone_number">Phone Number</label>
+                        <input type="text" class="form-control" id="phone_number" name="phone_number">
+                     </div>
+                       <div class="form-group">
+                        <label for="emergency_contact_number">Emergency Phone Number</label>
+                        <input type="text" class="form-control" id="emergency_contact_number" name="emergency_contact_number">
+                     </div>
+                     <div class="form-group">
+                        <label for="address">Address</label>
+                        <textarea class="form-control" id="address" name="address"></textarea>
+                     </div>
+                  </div>
+                  <!-- Right side -->
+                  <div class="col-md-6">
+
+                     <div class="form-group">
+                        <label for="date_joined">Date Joined</label>
+                        <input type="date" class="form-control" id="date_joined" name="date_joined">
+                     </div>
+                     <div class="form-group">
+                        <label for="date_left">Date Left</label>
+                        <input type="date" class="form-control" id="date_left" name="date_left">
+                     </div>
+                     <div class="form-group">
+                        <label for="responsibility">Responsibility</label>
+                        <input type="text" class="form-control" id="responsibility" name="responsibility">
+                     </div>
+                     <div class="form-group">
+    <label>Position</label>
+    {{ form.position }}
+</div>
+                      <br>
+
+                     <div class="form-group">
+                        <label for="membership_status">Membership Status</label>
+                        <select class="form-control" id="membership_status" name="membership_status" required>
+                           <option value="A">Active</option>
+                           <option value="I">Inactive</option>
+                        </select>
+                     </div>
+                     <div class="form-group">
+                        <label for="occupation">Occupation</label>
+                        <input type="text" class="form-control" id="occupation" name="occupation">
+                     </div>
+                     <div class="form-group">
+                        <label for="bio">Bio</label>
+                        <textarea class="form-control" id="bio" name="bio"></textarea>
+                     </div>
+                     <div class="form-group">
+                        <label for="interests">Interests</label>
+                        <textarea class="form-control" id="interests" name="interests"></textarea>
+                     </div>
+                     <div class="form-group">
+                        <label for="picture">Picture</label>
+                        <input type="file" class="form-control" id="picture" name="picture">
+                     </div>
+
+                  </div>
+               </div>
+               <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+         </div>
+         {% endblock %}
+      </div>
+   </div>
+</main>
+{% include "footer.html" %}
+{% endif %}

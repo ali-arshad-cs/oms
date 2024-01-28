@@ -10,6 +10,9 @@ urlpatterns = [
     path('guardians/', include('guardians.urls', namespace='guardians')),
     #path('leaves/', include('leaves.urls', namespace='leaves')),
     path('', include('employees.urls')),
+    path('members/', include('members.urls', namespace='members')),
+    path('volunteers/', include('volunteer.urls', namespace='volunteers')),
+
 
 ]
 handler404 = 'authentication.views.custom_404'

@@ -48,6 +48,9 @@ INSTALLED_APPS = [
     'guardians',
     'leaves',
     'employees',
+    'members',
+    'volunteer',
+    'marketing',
 ]
 
 MIDDLEWARE = [

@@ -101,6 +101,42 @@
                 </nav>
             </div>
 
+            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts5" aria-expanded="false" aria-controls="collapseLayouts5">
+                <div class="sb-nav-link-icon"><i class="fas fa-user-tie"></i></div>
+                Official Members
+                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+            </a>
+            <div class="collapse" id="collapseLayouts5" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                <nav class="sb-sidenav-menu-nested nav">
+                    <a class="nav-link" href="{% url 'members:member_list' %}">Member List</a>
+                    <a class="nav-link" href="{% url 'members:create_member' %}"><i class="fas fa-plus"> </i> Add New Member</a>
+                </nav>
+            </div>
+
+             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts6" aria-expanded="false" aria-controls="collapseLayouts6">
+                <div class="sb-nav-link-icon"><i class="fas fa-user-tie"></i></div>
+                Volunteers
+                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+            </a>
+            <div class="collapse" id="collapseLayouts6" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                <nav class="sb-sidenav-menu-nested nav">
+                    <a class="nav-link" href="{% url 'volunteers:volunteer_list' %}">Volunteer List</a>
+                    <a class="nav-link" href="{% url 'volunteers:create_volunteer' %}"><i class="fas fa-plus"> </i> Add New Volunteer</a>
+                </nav>
+            </div>
+
+             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts7" aria-expanded="false" aria-controls="collapseLayouts7">
+                <div class="sb-nav-link-icon"><i class="fas fa-user-tie"></i></div>
+                Marketing Calls
+                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+            </a>
+            <div class="collapse" id="collapseLayouts7" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                <nav class="sb-sidenav-menu-nested nav">
+                    <a class="nav-link" href="">Call List</a>
+                    <a class="nav-link" href=""><i class="fas fa-plus"> </i> Make a new call</a>
+                </nav>
+            </div>
+
 
 
 

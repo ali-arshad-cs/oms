@@ -102,4 +102,7 @@ class Orphan(models.Model):
         year_unit = "Year" if years == 1 else "Years"
         month_unit = "month" if months == 1 else "months"
 
-        return f"{years} {year_unit} and {months} {month_unit}"
+        if years > 0:
+            return f"{years} {year_unit} and {months} {month_unit}"
+        else:
+            return f"{months} {month_unit}"

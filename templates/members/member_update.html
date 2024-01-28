@@ -1,0 +1,128 @@
+{% if user.is_authenticated %}
+    {% include "header.html" %}
+    {% include "sidenav.html" %}
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid px-4">
+                <h1 class="mt-4">Update Member Form</h1>
+                {% for message in messages %}
+                    <div class="alert alert-dismissible fade show {% if message.tags == 'success' %}alert-success{% elif message.tags == 'error' %}alert-danger{% endif %}" role="alert" id="alertMessage">
+                        <strong>Alert:</strong> {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endfor %}
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="fas fa-table me-1"></i>
+                        Update form
+                    </div>
+                    <div class="card-body">
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                             <div class="row">
+                  <!-- Left side -->
+                  <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="full_name">Full Name</label>
+                                <input class="form-control" type="text" id="full_name" name="full_name" value="{{ form.instance.full_name }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="father_name">Father's Name</label>
+                                <input class="form-control" type="text" id="father_name" name="father_name" value="{{ form.instance.father_name }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="dob">Date of Birth</label>
+                                <input class="form-control" type="date" id="dob" name="dob" value="{{ form.instance.dob }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="qualification">Qualification</label>
+                                <input class="form-control" type="text" id="qualification" name="qualification" value="{{ form.instance.qualification }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input class="form-control" type="email" id="email" name="email" value="{{ form.instance.email }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="cnic">CNIC</label>
+                                <input class="form-control" type="text" id="cnic" name="cnic" value="{{ form.instance.cnic }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="gender">Gender</label>
+                                <select class="form-control" id="gender" name="gender">
+                                    <option value="M" {% if form.instance.gender == 'M' %}selected{% endif %}>Male</option>
+                                    <option value="F" {% if form.instance.gender == 'F' %}selected{% endif %}>Female</option>
+                                    <option value="O" {% if form.instance.gender == 'O' %}selected{% endif %}>Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone_number">Phone Number</label>
+                                <input class="form-control" type="text" id="phone_number" name="phone_number" value="{{ form.instance.phone_number }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="address">Address</label>
+                                <textarea class="form-control" id="address" name="address">{{ form.instance.address }}</textarea>
+                            </div>
+                        <div class="form-group">
+                                <label for="emergency_contact_number">Emergency Contact Number</label>
+                                <input class="form-control" type="text" id="emergency_contact_number" name="emergency_contact_number" value="{{ form.instance.emergency_contact_number }}">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                  </div>
+                                 <div class="col-md-6">
+
+                            <div class="form-group">
+                                <label for="date_joined">Date Joined</label>
+                                <input class="form-control" type="date" id="date_joined" name="date_joined" value="{{ form.instance.date_joined }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="date_left">Date Left</label>
+                                <input class="form-control" type="date" id="date_left" name="date_left" value="{{ form.instance.date_left }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="responsibility">Responsibility</label>
+                                <input class="form-control" type="text" id="responsibility" name="responsibility" value="{{ form.instance.responsibility }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="position">Position</label>
+                                <select class="form-control" id="position" name="position">
+                                    {% for position_value, position_label in form.fields.position.choices %}
+                                        <option value="{{ position_value }}" {% if position_value == form.instance.position %}selected{% endif %}>{{ position_label }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="membership_status">Membership Status</label>
+                                <select class="form-control" id="membership_status" name="membership_status">
+                                    <option value="A" {% if form.instance.membership_status == 'A' %}selected{% endif %}>Active</option>
+                                    <option value="I" {% if form.instance.membership_status == 'I' %}selected{% endif %}>Inactive</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="occupation">Occupation</label>
+                                <input class="form-control" type="text" id="occupation" name="occupation" value="{{ form.instance.occupation }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="bio">Bio</label>
+                                <textarea class="form-control" id="bio" name="bio">{{ form.instance.bio }}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="interests">Interests</label>
+                                <textarea class="form-control" id="interests" name="interests">{{ form.instance.interests }}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="picture">Picture</label>
+                                <input class="form-control" type="file" id="picture" name="picture">
+                            </div>
+
+                                 </div>
+                             </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+        {% include "footer.html" %}
+    </div>
+{% endif %}
