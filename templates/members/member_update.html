@@ -34,7 +34,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="dob">Date of Birth</label>
-                                <input class="form-control" type="date" id="dob" name="dob" value="{{ form.instance.dob }}">
+                                <input class="form-control" type="date" id="dob" name="dob" value="{% if form.instance.dob %}{{ form.instance.dob|date:'Y-m-d' }}{% endif %}">
                             </div>
                             <div class="form-group">
                                 <label for="qualification">Qualification</label>
@@ -74,11 +74,11 @@
 
                             <div class="form-group">
                                 <label for="date_joined">Date Joined</label>
-                                <input class="form-control" type="date" id="date_joined" name="date_joined" value="{{ form.instance.date_joined }}">
+                                <input class="form-control" type="date" id="date_joined" name="date_joined" value="{% if form.instance.date_joined %}{{ form.instance.date_joined|date:'Y-m-d' }}{% endif %}">
                             </div>
                             <div class="form-group">
                                 <label for="date_left">Date Left</label>
-                                <input class="form-control" type="date" id="date_left" name="date_left" value="{{ form.instance.date_left }}">
+                                <input class="form-control" type="date" id="date_left" name="date_left" value="{% if form.instance.date_left %}{{ form.instance.date_left|date:'Y-m-d' }}{% endif %}">
                             </div>
                             <div class="form-group">
                                 <label for="responsibility">Responsibility</label>

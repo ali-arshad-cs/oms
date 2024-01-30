@@ -26,26 +26,28 @@
             <table id="datatablesSimple" class="table">
                <thead>
                   <tr>
+                      <th></th>
                      <th>Full Name</th>
                      <th>Phone</th>
                      <th>Position</th>
                       <th>Qualification</th>
                       <th>CNIC</th>
                      <th>Status</th>
-                     <th>Duration</th>
+                     <th>Duration In Foundation</th>
                      <th>Date Joined</th>
                      <th>Date Left</th>
                   </tr>
                </thead>
                <tfoot>
                   <tr>
+                      <th></th>
                      <th>Full Name</th>
                      <th>Phone</th>
                      <th>Position</th>
                       <th>Qualification</th>
                       <th>CNIC</th>
                      <th>Status</th>
-                     <th>Duration</th>
+                     <th>Duration In Foundation</th>
                      <th>Date Joined</th>
                      <th>Date Left</th>
                      <!-- Add other columns as needed -->
@@ -56,14 +58,24 @@
                   <tr>
 
 
-    <td><a href="{% url 'members:member_detail' pk=member.pk %}">{{ member.full_name }}</a></td>
+
     <!-- Add other columns as needed -->
+                      <td style="text-align: center;">
+                        {% if member.picture %}
+                        <div style="width: 45px; height: 45px; overflow: hidden; border-radius: 50%; border: 2px solid #ccc;">
+                           <img src="{{ member.picture.url }}" alt="Picture" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                        </div>
+                        {% else %}
+                        <!-- Display nothing if orphan_picture is not present -->
+                        {% endif %}
+                     </td>
+                      <td><a href="{% url 'members:member_detail' pk=member.pk %}">{{ member.full_name }}</a></td>
                      <td>{{ member.phone_number }}</td>
                      <td>{{ member.position }}</td>
                       <td>{{ member.qualification }}</td>
                       <td>{{ member.cnic }}</td>
                      <td>{{ member.membership_status }}</td>
-                      <td></td>
+                      <td>{{ member.time_spent }}</td>
                      <td>{{ member.date_joined }}</td>
                      <td>{{ member.date_left }}</td>
 
