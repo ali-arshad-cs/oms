@@ -1,3 +1,5 @@
+from datetime import date
+
 from django.db import models
 
 
@@ -23,6 +25,39 @@ class Employee(models.Model):
     def __str__(self):
         return f"{self.full_name}"
 
+    def time_spent(self):
+        if self.hire_date is None:
+            return "Invalid hire date"
+
+        if not isinstance(self.hire_date, date):
+            return "Invalid hire date"
+
+        if self.date_left is not None:
+            if not isinstance(self.date_left, date):
+                return "Invalid left date"
+
+            end_date = self.date_left
+        else:
+            end_date = date.today()
+
+        years = end_date.year - self.hire_date.year
+        months = end_date.month - self.hire_date.month
+
+        if end_date.day < self.hire_date.day:
+            months -= 1
+
+        if months < 0:
+            years -= 1
+            months += 12
+
+        year_unit = "Year" if years == 1 else "Years"
+        month_unit = "month" if months == 1 else "months"
+
+        if years > 0:
+            return f"{years} {year_unit} and {months} {month_unit}"
+        else:
+            return f"{months} {month_unit}"
+
 
 class MonthlySalary(models.Model):
     salary_id = models.AutoField(primary_key=True)
@@ -38,3 +73,5 @@ class MonthlySalary(models.Model):
 
     def __str__(self):
         return f"{self.employee} - {self.month.strftime('%B, %Y')}"
+
+

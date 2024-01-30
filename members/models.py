@@ -1,3 +1,5 @@
+from datetime import date
+
 from django.db import models
 
 from oms import settings
@@ -60,3 +62,36 @@ class Member(models.Model):
 
     def __str__(self):
         return self.full_name
+
+    def time_spent(self):
+        if self.date_joined is None:
+            return "Invalid admission date"
+
+        if not isinstance(self.date_joined, date):
+            return "Invalid admission date"
+
+        if self.date_left is not None:
+            if not isinstance(self.date_left, date):
+                return "Invalid discharge date"
+
+            end_date = self.date_left
+        else:
+            end_date = date.today()
+
+        years = end_date.year - self.date_joined.year
+        months = end_date.month - self.date_joined.month
+
+        if end_date.day < self.date_joined.day:
+            months -= 1
+
+        if months < 0:
+            years -= 1
+            months += 12
+
+        year_unit = "Year" if years == 1 else "Years"
+        month_unit = "month" if months == 1 else "months"
+
+        if years > 0:
+            return f"{years} {year_unit} and {months} {month_unit}"
+        else:
+            return f"{months} {month_unit}"

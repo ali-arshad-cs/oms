@@ -26,6 +26,7 @@
             <table id="datatablesSimple" class="table">
                <thead>
                   <tr>
+                      <th></th>
                      <th>Employee ID</th>
                      <th>Full Name</th>
                      <th>Phone</th>
@@ -41,6 +42,7 @@
                </thead>
                <tfoot>
                   <tr>
+                      <th></th>
                      <th>Employee ID</th>
                      <th>Full Name</th>
                      <th>Phone</th>
@@ -57,6 +59,15 @@
                <tbody>
                   {% for employee in employees %}
                   <tr>
+                      <td style="text-align: center;">
+                        {% if employee.picture %}
+                        <div style="width: 45px; height: 45px; overflow: hidden; border-radius: 50%; border: 2px solid #ccc;">
+                           <img src="{{ employee.picture.url }}" alt="Picture" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                        </div>
+                        {% else %}
+                        <!-- Display nothing if orphan_picture is not present -->
+                        {% endif %}
+                     </td>
                      <td>{{ employee.id }}</td>
 
     <td><a href="{% url 'employees:employee_detail' pk=employee.pk %}">{{ employee.full_name }}</a></td>
@@ -67,7 +78,7 @@
                      <td>{{ employee.is_active }}</td>
                      <td>{{ employee.date_of_birth }}</td>
                      <td>{{ employee.hire_date }}</td>
-                     <td></td>
+                     <td>{{ employee.time_spent }}</td>
                      <td>{{ employee.date_left }}</td>
 
                      <!-- Add other columns as needed -->
