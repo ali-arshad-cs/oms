@@ -126,14 +126,16 @@
             </div>
 
              <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts7" aria-expanded="false" aria-controls="collapseLayouts7">
-                <div class="sb-nav-link-icon"><i class="fas fa-user-tie"></i></div>
+                <div class="sb-nav-link-icon"><i class="fas fa-phone"></i></div>
                 Marketing Calls
                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
             </a>
             <div class="collapse" id="collapseLayouts7" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                 <nav class="sb-sidenav-menu-nested nav">
-                    <a class="nav-link" href="">Call List</a>
-                    <a class="nav-link" href=""><i class="fas fa-plus"> </i> Make a new call</a>
+                    <a class="nav-link" href="{% url 'marketing:leads_list' %}"> </i> Leads List</a>
+                    <a class="nav-link" href="{% url 'marketing:create_person_lead' %}"><i class="fas fa-plus"> </i>Create Lead</a>
+                    <a class="nav-link" href="{% url 'marketing:calls_list' %}"> </i> Calls List</a>
+                    <a class="nav-link" href="{% url 'marketing:create_cold_call' %}"><i class="fas fa-plus"> </i>Make Call</a>
                 </nav>
             </div>
 

@@ -1,0 +1,40 @@
+{% if user.is_authenticated %}
+{% include "header.html" %}
+{% include "sidenav.html" %}
+<div id="layoutSidenav_content">
+<main>
+   <div class="container-fluid px-4">
+
+      <h1 class="mt-4">Create Lead</h1>
+       {% for message in messages %}
+            <div class="alert alert-dismissible fade show {% if message.tags == 'success' %}alert-success{% elif message.tags == 'error' %}alert-danger{% endif %}" role="alert" id="alertMessage">
+               <strong>Alert:</strong> {{ message }}
+               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+               </button>
+            </div>
+            {% endfor %}
+      <div class="card mb-4">
+         <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+            Register form
+         </div>
+         {% block content %}
+         <div class="card-body">
+           <form method="post">
+    {% csrf_token %}
+    <div class="form-group">
+        {% for field in form.visible_fields %}
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+        {{ field }}
+        {% endfor %}
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+         </div>
+         {% endblock %}
+      </div>
+   </div>
+</main>
+{% include "footer.html" %}
+{% endif %}

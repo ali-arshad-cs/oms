@@ -1,0 +1,134 @@
+{% if user.is_authenticated %}
+{% include "header.html" %}
+{% include "sidenav.html" %}
+<div id="layoutSidenav_content"  style="background:#e2e8f0">
+<main>
+   <div class="container-fluid px-4"  style="background:#e2e8f0">
+      <h1 class="mt-4">Leads List</h1>
+      <ol class="breadcrumb mb-4">
+         <li class="breadcrumb-item active">OMS Dashboard</li>
+      </ol>
+      {% for message in messages %}
+      <div class="alert alert-dismissible fade show {% if message.tags == 'success' %}alert-success{% elif message.tags == 'error' %}alert-danger{% endif %}" role="alert" id="alertMessage">
+         <strong>Alert:</strong> {{ message }}
+         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+         <span aria-hidden="true">&times;</span>
+         </button>
+      </div>
+      {% endfor %}
+      <div class="row">
+         <div class="col-xl-3 col-md-6">
+            <div class="card mb-4">
+               <div class="card-body">Total Leads</div>
+               <div class="card-footer d-flex align-items-center justify-content-between">
+                  <h5>{{ total_onboard_orphans }}</h5>
+                  <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+               </div>
+            </div>
+         </div>
+<!--         <div class="col-xl-3 col-md-6">-->
+<!--            <div class="card mb-4" style="background: pink">-->
+<!--               <div class="card-body">Total Onboard Girls</div>-->
+<!--               <div class="card-footer d-flex align-items-center justify-content-between">-->
+<!--                  <h5>{{ total_onboard_female_orphans }}</h5>-->
+<!--               </div>-->
+<!--            </div>-->
+<!--         </div>-->
+<!--         <div class="col-xl-3 col-md-6">-->
+<!--            <div class="card mb-4" style="background: lightblue">-->
+<!--               <div class="card-body">Total Onboard Boys</div>-->
+<!--               <div class="card-footer d-flex align-items-center justify-content-between">-->
+<!--                  <h5>{{ total_onboard_male_orphans }}</h5>-->
+<!--               </div>-->
+<!--            </div>-->
+<!--         </div>-->
+<!--         <div class="col-xl-3 col-md-6">-->
+<!--            <div class="card mb-4">-->
+<!--               <div class="card-body">Total Orphans From Beginning</div>-->
+<!--               <div class="card-footer d-flex align-items-center justify-content-between">-->
+<!--                  <h5>{{ total_orphans }}</h5>-->
+<!--                  <div class="small text-white"><i class="fas fa-angle-right"></i></div>-->
+<!--               </div>-->
+<!--            </div>-->
+<!--         </div>-->
+      </div>
+      <div class="card mb-4">
+         <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+            Orphan DataTable
+         </div>
+         <div class="card-body">
+            <table id="datatablesSimple" class="table">
+               <thead>
+                  <tr>
+
+                     <th>Name</th>
+                     <th>Phone</th>
+                     <th>Address</th>
+                     <th>Card Picture</th>
+                     <th>Lead Source</th>
+                     <th>Email</th>
+                     <th>Follow Up Date</th>
+                     <th>Total Calls</th>
+                     <th>Added By</th>
+                     <th>Last Call</th>
+                     <th>Notes</th>
+                     <th>Lead Quality</th>
+                     <th>Created At</th>
+                     <th>Updated At</th>
+
+
+                     <!-- Add other columns as needed -->
+                  </tr>
+               </thead>
+               <tfoot>
+                  <tr>
+                    <th>Name</th>
+                     <th>Phone</th>
+                     <th>Address</th>
+                     <th>Card Picture</th>
+                     <th>Lead Source</th>
+                     <th>Email</th>
+                     <th>Follow Up Date</th>
+                     <th>Total Calls</th>
+                     <th>Added By</th>
+                     <th>Last Call</th>
+                     <th>Notes</th>
+                     <th>Lead Quality</th>
+                     <th>Created At</th>
+                     <th>Updated At</th>
+
+                     <!-- Add other columns as needed -->
+                  </tr>
+               </tfoot>
+               <tbody>
+                  {% for lead in leads %}
+                  <tr>
+
+                     <td><a href="{% url 'marketing:update_person_lead' pk=lead.pk %}">{{ lead.name }}</a></td>
+
+                     <td>{{ lead.phone }}</td>
+                     <td></td>
+                     <td></td>
+                     <td>{{ lead.lead_source }}</td>
+                     <td>{{ lead.email }}</td>
+                     <td></td>
+                     <td></td>
+                     <td></td>
+                     <td></td>
+                     <td></td>
+                     <td>{{ lead.lead_quality }}</td>
+                     <td>{{ lead.created_at }}</td>
+                     <td>{{ lead.updated_at }}</td>
+
+                     <!-- Add other columns as needed -->
+                  </tr>
+                  {% endfor %}
+               </tbody>
+            </table>
+         </div>
+      </div>
+   </div>
+</main>
+{% include "footer.html" %}
+{% endif %}
