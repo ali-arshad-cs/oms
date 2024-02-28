@@ -19,6 +19,8 @@ class PersonLead(models.Model):
     lead_quality = models.CharField(max_length=20, choices=LEAD_QUALITY_CHOICES)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    address = models.CharField(max_length=100)
+    visiting_card = models.ImageField(upload_to='shared_images/', null=True, blank=True)
 
     def __str__(self):
         return self.name

@@ -6,11 +6,11 @@ from .forms import PersonLeadForm, ColdCallForm
 
 def create_person_lead(request):
     if request.method == 'POST':
-        form = PersonLeadForm(request.POST)
+        form = PersonLeadForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             messages.success(request, 'Person lead created successfully.')
-            return redirect('marketing/lead_list')  # Redirect to lead list page
+            return redirect('marketing:leads_list')  # Redirect to lead list page
         else:
             for field, errors in form.errors.items():
                 for error in errors:
@@ -28,11 +28,11 @@ def leads_list(request):
 def update_person_lead(request, pk):
     person_lead = get_object_or_404(PersonLead, pk=pk)
     if request.method == 'POST':
-        form = PersonLeadForm(request.POST, instance=person_lead)
+        form = PersonLeadForm(request.POST, request.FILES, instance=person_lead)
         if form.is_valid():
             form.save()
             messages.success(request, 'Person lead updated successfully.')
-            return redirect('lead_list')  # Redirect to lead list page
+            return redirect('marketing:leads_list')  # Redirect to lead list page
         else:
             for field, errors in form.errors.items():
                 for error in errors:

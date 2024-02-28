@@ -21,7 +21,7 @@
          </div>
          {% block content %}
          <div class="card-body">
-           <form method="post">
+           <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="form-group">
         {% for field in form.visible_fields %}
